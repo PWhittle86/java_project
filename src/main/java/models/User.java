@@ -21,4 +21,5 @@ public class User {
 
     public ArrayList<Advert> getUserAdverts() {return userAdverts;}
     public void setUserAdverts(ArrayList<Advert> userAdverts) {this.userAdverts = userAdverts;}
+
 }
