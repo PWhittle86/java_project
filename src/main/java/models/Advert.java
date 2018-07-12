@@ -19,7 +19,21 @@ public class Advert {
         this.advertOwner = advertOwner;
     }
 
+    public int getId() {return id;}
+    public void setId(int id) {this.id = id;}
 
+    public String getAdvertTitle() {return advertTitle;}
+    public void setAdvertTitle(String advertTitle) {this.advertTitle = advertTitle;}
 
+    public String getAdvertDescription() {return advertDescription;}
+    public void setAdvertDescription(String advertDescription) {this.advertDescription = advertDescription;}
 
+//    public ArrayList<Categories> getCategories() {return categories;}
+//    public void setCategories(ArrayList<Categories> categories) {this.categories = categories;}
+
+    public Double getAskingPrice() {return askingPrice;}
+    public void setAskingPrice(Double askingPrice) {this.askingPrice = askingPrice;}
+
+    public User getAdvertOwner() {return advertOwner;}
+    public void setAdvertOwner(User advertOwner) {this.advertOwner = advertOwner;}
 }
