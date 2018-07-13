@@ -1,0 +1,31 @@
+<h3 class="pageHeader">Update An Existing Advert</h3>
+
+<form action="/adverts/update" method="post">
+
+    <label for="advertTitle">Advert Title:</label>
+    <input class="inputbox" type="text" name="advertTitle" required="true" id="advertTitle" value="$advert.getId()">
+
+    <label for="advertDescription">Advert Description:</label>
+    <textarea class="textbox" name="advertDescription" required="true" rows="3" cols="33" maxlength="200"
+              id="advertDescription">$advert.getAdvertDescription()</textarea>
+
+    <label for="askingPrice">Asking Price:</label>
+    <input class="inputbox" type="number" name="askingPrice" required="true" id="askingPrice"
+           value="$advert.getAskingPrice()">
+
+    <label for="advertOwner">Advert Owner:</label>
+    <select id="advertOwner" name="advertOwner">
+
+        #foreach( $user in $allUsers )
+        <option value="$user.getId()"
+                #if ($user.getId() == $advert.getAdvertOwner().getId())
+                selected="selected"
+                #end>
+            $user.getUsername()
+        </option>
+        #end
+    </select>
+
+    <input type="submit" value="Update Advert" class="button">
+
+</form>
