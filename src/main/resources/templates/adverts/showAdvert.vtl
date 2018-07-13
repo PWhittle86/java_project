@@ -5,5 +5,8 @@
     <p>Seller's Description: $advert.getAdvertDescription()</p>
     <p>Asking price: $advert.getAskingPrice()</p>
     <p>Seller's ID: $advert.getAdvertOwner().getUsername()</p>
-
+    <a href="/adverts/update/$advert.getId()" class="button">Edit</a>
+    <form action="/departments/delete/$advert.getId()" method="post">
+        <input type="submit" value="Delete" class="button">
+    </form>
 </div>

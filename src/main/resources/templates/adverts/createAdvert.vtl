@@ -1,0 +1,23 @@
+<h3 class="pageHeader">Create a New Advert</h3>
+
+<form action="/adverts/new" method="post">
+
+    <label for="advertTitle">Advert Title:</label>
+    <input class="inputbox" type="text" name="advertTitle" required="true" id="advertTitle">
+
+    <label for="advertDescription">Advert Description:</label>
+    <textarea class="textbox" name="advertDescription" required="true" rows="3" cols="33" maxlength="200" id="advertDescription"></textarea>
+
+    <label for="askingPrice">Asking Price:</label>
+    <input class="inputbox" type="number" name="askingPrice" required="true" id="askingPrice">
+
+    <label for="advertOwner">Advert Owner:</label>
+    <select id= "advertOwner" name="advertOwner">
+        #foreach($user in $allUsers)
+        <option value="$user.getId()">$user.getUsername()</option>
+        #end
+    </select>
+
+    <input type="submit" value="Save Advert" class="button">
+
+</form>
