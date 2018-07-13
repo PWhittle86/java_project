@@ -1,7 +1,11 @@
 package models;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.ArrayList;
 
+@Entity
+@Table()
 public class Category {
 
     private int id;
@@ -9,8 +13,7 @@ public class Category {
     private Category parentCategory;
     private ArrayList<Category> childCategories;
 
-    public Category(String categoryName, Category parentCategory, ArrayList<Category> childCategories) {
-        this.id = id;
+    public Category(Category parentCategory,String categoryName) {
         this.categoryName = categoryName;
         this.parentCategory = parentCategory;
         this.childCategories = childCategories;
