@@ -1,0 +1,10 @@
+<p class="pageHeader">Edit User Details</p>
+
+<form action="/users/$foundUser.getId()" method="post">
+    <label for="username">Username:</label>
+    <input type="text" class="inputbox" name="username" id="username" value="$foundUser.getUsername()">
+
+    <input type="submit" value="Save" class="button">
+</form>
+
+<a href="/users/$foundUser.getId()" class="button center">Cancel</a>
