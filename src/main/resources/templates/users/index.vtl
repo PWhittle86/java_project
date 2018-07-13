@@ -4,7 +4,7 @@
 
     <ul>
         #foreach ($user in $allUsers)
-        <li>$user.getUsername()</li>
+        <li><a href="/users/$user.getId()">$user.getUsername()</a></li>
         #end
     </ul>
 
