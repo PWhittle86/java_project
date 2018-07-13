@@ -8,6 +8,7 @@ public class MainController {
         Seeds.seedData();
 
         AdController adController = new AdController();
+        UserController userController =new UserController();
 
     }
 
