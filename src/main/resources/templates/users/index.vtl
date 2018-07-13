@@ -2,11 +2,14 @@
 
 <div class="container">
 
+    <a href="/users/new">Add User</a>
+
     <ul>
         #foreach ($user in $allUsers)
         <li><a href="/users/$user.getId()">$user.getUsername()</a></li>
         #end
     </ul>
+
 
 </div>
 
