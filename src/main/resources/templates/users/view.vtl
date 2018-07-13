@@ -1,0 +1,13 @@
+<p class="pageHeader">$foundUser.getUsername()</p>
+
+<div class="container">
+
+    <ul>
+        #foreach ($advert in $userAdverts)
+        <li><a href="/adverts/$advert.getId()">$advert.getAdvertTitle()</a></li>
+        #end
+    </ul>
+
+</div>
+
+
