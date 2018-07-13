@@ -17,6 +17,5 @@
         <mapping class="models.ShopFront"/>
         <mapping class="models.User"/>
         <mapping class="models.Category"/>
-
     </session-factory>
 </hibernate-configuration>

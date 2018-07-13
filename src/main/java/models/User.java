@@ -2,6 +2,7 @@ package models;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name= "users")
@@ -9,13 +10,13 @@ public class User {
 
     private int id;
     private String username;
-    private ArrayList<Advert> userAdverts;
+    private List<Advert> userAdverts;
 
     public User() {
     }
     public User(String username) {
         this.username = username;
-        this.userAdverts = new ArrayList<Advert>();
+        this.userAdverts =  new ArrayList<Advert>();
     }
 
     @Id
@@ -28,8 +29,8 @@ public class User {
     public String getUsername() {return username;}
     public void setUsername(String username) {this.username = username;}
 
-    @OneToMany(mappedBy = "user_id", fetch= FetchType.LAZY)
-    public ArrayList<Advert> getUserAdverts() {return userAdverts;}
-    public void setUserAdverts(ArrayList<Advert> userAdverts) {this.userAdverts = userAdverts;}
+    @OneToMany(mappedBy="advertOwner", fetch = FetchType.LAZY)
+    public List<Advert> getUserAdverts() {return userAdverts;}
+    public void setUserAdverts(List<Advert> userAdverts) {this.userAdverts = userAdverts;}
 
 }
