@@ -40,6 +40,28 @@ public class AdController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+        get("/adverts/:id", (req, res) -> {
+            int advertId = Integer.parseInt(req.params(":id"));
+            Advert advert = DBHelper.find(advertId, Advert.class);
+            Map<String, Object> model = new HashMap<>();
+
+            model.put("advert", advert);
+            model.put("template", "templates/adverts/showAdvert.vtl");
+
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        get("/adverts/update/:id", (req, res) -> {
+            int advertId = Integer.parseInt(req.params(":id"));
+            Advert advert = DBHelper.find(advertId, Advert.class);
+            Map<String, Object> model = new HashMap<>();
+
+            model.put("advert", advert);
+            model.put("template", "templates/adverts/updateAdvert.vtl");
+
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
         post("/adverts/new", (req, res) -> {
             int userId = Integer.parseInt(req.queryParams("advertOwner"));
             User user = DBHelper.find(userId, User.class);
@@ -55,23 +77,8 @@ public class AdController {
             return null;
         }, new VelocityTemplateEngine());
 
-        get("/adverts/:id", (req, res) -> {
-            int advertId = Integer.parseInt(req.params(":id"));
-            Advert advert = DBHelper.find(advertId, Advert.class);
-            Map<String, Object> model = new HashMap<>();
-
-            model.put("advert", advert);
-            model.put("template", "templates/adverts/showAdvert.vtl");
-
-            return new ModelAndView(model, "templates/layout.vtl");
-        }, new VelocityTemplateEngine());
-
 
 
     }
-
-
-
-
 
 }
