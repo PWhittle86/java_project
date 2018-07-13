@@ -12,6 +12,7 @@ import java.util.Map;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
+import static spark.route.HttpMethod.delete;
 import static spark.route.HttpMethod.get;
 
 public class AdController {
@@ -79,7 +80,35 @@ public class AdController {
             return null;
         }, new VelocityTemplateEngine());
 
+        post("adverts/update/:id", (req, res) -> {
+            int advertId = Integer.parseInt(req.params(":id"));
+            Advert updatedAdvert = DBHelper.find(advertId, Advert.class);
 
+            int userId = Integer.parseInt(req.queryParams("advertOwner"));
+
+            String advertTitle = req.queryParams("advertTitle");
+            String advertDescription = req.queryParams("advertDescription");
+            Double askingPrice = Double.parseDouble(req.queryParams("askingPrice"));
+            User advertOwner = DBHelper.find(userId, User.class);
+
+            updatedAdvert.setAdvertTitle(advertTitle);
+            updatedAdvert.setAdvertDescription(advertDescription);
+            updatedAdvert.setAskingPrice(askingPrice);
+            updatedAdvert.setAdvertOwner(advertOwner);
+
+            DBHelper.save(updatedAdvert);
+            res.redirect("/adverts");
+            return null;
+        }, new VelocityTemplateEngine());
+
+        post("adverts/delete/:id",(req, res) -> {
+            int advertId = Integer.parseInt(req.params(":id"));
+            Advert deletedAdvert = DBHelper.find(advertId, Advert.class);
+
+            DBHelper.delete(deletedAdvert);
+            res.redirect("/adverts");
+            return null;
+        }, new VelocityTemplateEngine());
 
     }
 

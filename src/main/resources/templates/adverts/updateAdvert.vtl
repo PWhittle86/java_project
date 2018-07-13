@@ -1,9 +1,9 @@
 <h3 class="pageHeader">Update An Existing Advert</h3>
 
-<form action="/adverts/update" method="post">
+<form action="/adverts/update/$advert.getId()" method="post">
 
     <label for="advertTitle">Advert Title:</label>
-    <input class="inputbox" type="text" name="advertTitle" required="true" id="advertTitle" value="$advert.getId()">
+    <input class="inputbox" type="text" name="advertTitle" required="true" id="advertTitle" value="$advert.getAdvertTitle()">
 
     <label for="advertDescription">Advert Description:</label>
     <textarea class="textbox" name="advertDescription" required="true" rows="3" cols="33" maxlength="200"
