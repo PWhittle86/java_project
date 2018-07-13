@@ -4,7 +4,7 @@
 
     <ul>
         #foreach ($advert in $allAdverts)
-        <li>$advert.getName()</li>
+        <li><a href="/adverts/$advert.getId()">$advert.getAdvertTitle()</a></li>
         #end
     </ul>
 
