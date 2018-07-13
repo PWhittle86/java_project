@@ -17,7 +17,7 @@ public class DBUser {
         List<Advert> result = null;
         try {
             Criteria cr = session.createCriteria(Advert.class);
-            cr.add(Restrictions.eq("user_id", user));
+            cr.add(Restrictions.eq("advertOwner", user));
             result = cr.list();
         }catch (HibernateException e){
             e.printStackTrace();
