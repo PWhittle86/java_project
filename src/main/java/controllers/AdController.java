@@ -54,8 +54,10 @@ public class AdController {
         get("/adverts/update/:id", (req, res) -> {
             int advertId = Integer.parseInt(req.params(":id"));
             Advert advert = DBHelper.find(advertId, Advert.class);
+            List<User> allUsers = DBHelper.getAll(User.class);
             Map<String, Object> model = new HashMap<>();
 
+            model.put("allUsers", allUsers);
             model.put("advert", advert);
             model.put("template", "templates/adverts/updateAdvert.vtl");
 
