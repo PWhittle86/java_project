@@ -30,3 +30,4 @@ public class Category {
     public ArrayList<Category> getChildCategories() {return childCategories;}
     public void setChildCategories(ArrayList<Category> childCategories) {this.childCategories = childCategories;}
 }
+

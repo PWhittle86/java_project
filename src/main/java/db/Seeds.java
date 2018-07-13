@@ -33,6 +33,5 @@ public class Seeds {
         DBHelper.save(advert3);
         DBHelper.save(advert4);
 
-
     }
 }

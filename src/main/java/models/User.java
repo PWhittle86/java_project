@@ -16,7 +16,7 @@ public class User {
     }
     public User(String username) {
         this.username = username;
-        this.userAdverts = new ArrayList<Advert>();
+        this.userAdverts =  new ArrayList<Advert>();
     }
 
     @Id
@@ -30,6 +30,7 @@ public class User {
     public void setUsername(String username) {this.username = username;}
 
     @OneToMany(mappedBy = "advertOwner", fetch = FetchType.LAZY)
+
     public List<Advert> getUserAdverts() {return userAdverts;}
     public void setUserAdverts(List<Advert> userAdverts) {this.userAdverts = userAdverts;}
 
