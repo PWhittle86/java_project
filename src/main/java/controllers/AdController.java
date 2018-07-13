@@ -20,16 +20,33 @@ public class AdController {
 
     private void setupEndPoints(){
 
-    get("/adverts", (req, res) -> {
-        Map<String, Object> model = new HashMap<>();
-        List<Advert> allAdverts = DBHelper.getAll(Advert.class);
-        model.put("allAdverts", allAdverts);
-        model.put("template", "templates/adverts/showAll.vtl");
+        get("/adverts", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Advert> allAdverts = DBHelper.getAll(Advert.class);
+            model.put("allAdverts", allAdverts);
+            model.put("template", "templates/adverts/showAll.vtl");
 
-        return new ModelAndView(model, "templates/layout.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
             }, new VelocityTemplateEngine());
 
 
+        get("/adverts/:id", (req, res) -> {
+            int advertId = Integer.parseInt(req.params(":id"));
+            Advert advert = DBHelper.find(advertId, Advert.class);
+            Map<String, Object> model = new HashMap<>();
+
+            model.put("advert", advert);
+            model.put("template", "templates/adverts/showAdvert.vtl");
+
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+
+
     }
+
+
+
+
 
 }
