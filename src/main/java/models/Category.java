@@ -4,8 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.ArrayList;
 
-@Entity
-@Table()
+
 public class Category {
 
     private int id;
