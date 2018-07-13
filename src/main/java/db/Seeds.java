@@ -8,8 +8,8 @@ import models.User;
 public class Seeds {
     public static void seedData() {
         DBHelper.deleteAll(ShopFront.class);
-        DBHelper.deleteAll(User.class);
         DBHelper.deleteAll(Advert.class);
+        DBHelper.deleteAll(User.class);
 //        DBHelper.deleteAll(Category.class);
 
         ShopFront shopFront = new ShopFront();
