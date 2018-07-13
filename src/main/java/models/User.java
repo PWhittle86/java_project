@@ -11,6 +11,9 @@ public class User {
     private String username;
     private ArrayList<Advert> userAdverts;
 
+    public User() {
+    }
+
     public User(String username) {
         this.username = username;
         this.userAdverts = new ArrayList<Advert>();

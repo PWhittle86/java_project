@@ -14,6 +14,9 @@ public class Advert {
     private Double askingPrice;
     private User advertOwner;
 
+    public Advert() {
+    }
+
     public Advert(String advertTitle, String advertDescription, Double askingPrice, User advertOwner) {
         this.advertTitle = advertTitle;
         this.advertDescription = advertDescription;

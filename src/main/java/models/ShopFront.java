@@ -7,6 +7,8 @@ public class ShopFront {
     private ArrayList<User> allUsers;
     private ArrayList<Advert> allAdverts;
 
+
+
     public ShopFront() {
 
         this.allUsers = new ArrayList<User>();
