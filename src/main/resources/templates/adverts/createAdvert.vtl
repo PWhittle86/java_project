@@ -6,7 +6,7 @@
     <input class="inputbox" type="text" name="advertTitle" required="true" id="advertTitle">
 
     <label for="advertCategory">Advert Category:</label>
-    <select id="advertCategory" required ="true" name="advertCategory">
+    <select id="advertCategory" name="advertCategory">
         #foreach($category in $categories)
         <option value="$category.getId()">$category.getCategoryName()</option>
         #end
