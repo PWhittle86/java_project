@@ -5,6 +5,13 @@
     <label for="advertTitle">Advert Title:</label>
     <input class="inputbox" type="text" name="advertTitle" required="true" id="advertTitle">
 
+    <label for="advertCategory">Advert Category:</label>
+    <select id="advertCategory" required ="true" name="advertCategory">
+        #foreach($category in $categories)
+        <option value="$category.getId()">$category.getCategoryName()</option>
+        #end
+    </select>
+
     <label for="advertDescription">Advert Description:</label>
     <textarea class="textbox" name="advertDescription" required="true" rows="3" cols="33" maxlength="200" id="advertDescription"></textarea>
 

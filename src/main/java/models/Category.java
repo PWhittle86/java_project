@@ -25,12 +25,22 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public int getId() {return id;}
-    public void setId(int id) {this.id = id;}
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Column(name = "name")
-    public String getCategoryName() {return categoryName;}
-    public void setCategoryName(String categoryName) {this.categoryName = categoryName;}
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @ManyToMany
@@ -38,9 +48,16 @@ public class Category {
             joinColumns = {@JoinColumn(name = "category_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "advert_id", nullable = false, updatable = false)})
 
-    public List<Advert> getAdverts() {return adverts;}
-    public void setAdverts(List<Advert> adverts) {this.adverts = adverts;}
+    public List<Advert> getAdverts() {
+        return adverts;
+    }
 
-    public void addAdvert(Advert advert) {this.adverts.add(advert);}
+    public void setAdverts(List<Advert> adverts) {
+        this.adverts = adverts;
+    }
+
+    public void addAdvert(Advert advert) {
+        this.adverts.add(advert);
+    }
 
 }

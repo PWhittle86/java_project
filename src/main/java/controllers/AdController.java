@@ -2,6 +2,7 @@ package controllers;
 
 import db.DBHelper;
 import models.Advert;
+import models.Category;
 import models.User;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
@@ -35,9 +36,10 @@ public class AdController {
         get("/adverts/new", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<User> allUsers = DBHelper.getAll(User.class);
+            List<Category> categories = DBHelper.getAll(Category.class);
+            model.put("categories", categories);
             model.put("allUsers", allUsers);
             model.put("template", "templates/adverts/createAdvert.vtl");
-
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
@@ -69,12 +71,16 @@ public class AdController {
             int userId = Integer.parseInt(req.queryParams("advertOwner"));
             User user = DBHelper.find(userId, User.class);
 
+            int categoryId = Integer.parseInt(req.queryParams("advertCategory"));
+            Category category = DBHelper.find(categoryId, Category.class);
+
             String advertTitle = req.queryParams("advertTitle");
             String advertDescription = req.queryParams("advertDescription");
             double askingPrice = Double.parseDouble(req.queryParams("askingPrice"));
 
             Advert newAdvert = new Advert(advertTitle, advertDescription, askingPrice, user);
             DBHelper.save(newAdvert);
+            DBHelper.addCategoryToAdvert(category, newAdvert);
 
             res.redirect("/adverts");
             return null;
