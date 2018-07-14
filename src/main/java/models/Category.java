@@ -25,25 +25,15 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    public int getId() {return id;}
+    public void setId(int id) {this.id = id;}
 
     @Column(name = "name")
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
+    public String getCategoryName() {return categoryName;}
+    public void setCategoryName(String categoryName) {this.categoryName = categoryName;}
 
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "advert_category",
             joinColumns = {@JoinColumn(name = "category_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "advert_id", nullable = false, updatable = false)})

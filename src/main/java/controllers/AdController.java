@@ -79,8 +79,10 @@ public class AdController {
             double askingPrice = Double.parseDouble(req.queryParams("askingPrice"));
 
             Advert newAdvert = new Advert(advertTitle, advertDescription, askingPrice, user);
+            newAdvert.addCategory(category);
+            category.addAdvert(newAdvert);
             DBHelper.save(newAdvert);
-            DBHelper.addCategoryToAdvert(category, newAdvert);
+//            DBHelper.addCategoryToAdvert(category, newAdvert);
 
             res.redirect("/adverts");
             return null;

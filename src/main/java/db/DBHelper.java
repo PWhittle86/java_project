@@ -108,7 +108,6 @@ public class DBHelper {
 
     public static void addCategoryToAdvert(Category category, Advert advert){
         category.addAdvert(advert);
-        advert.addCategory(category);
         DBHelper.save(category);
     }
 
