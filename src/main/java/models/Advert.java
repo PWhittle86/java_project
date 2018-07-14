@@ -45,14 +45,10 @@ public class Advert {
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @ManyToMany
     @JoinTable(name = "advert_category",
-            joinColumns = {
-                    @JoinColumn(name = "advert_id", nullable = false, updatable = false)
-            },
-            inverseJoinColumns = {@JoinColumn(name = "category_id", nullable = false, updatable = false)}
-    )
-
+            joinColumns = {@JoinColumn(name = "advert_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "category_id", nullable = false, updatable = false)})
     public List<Category> getCategories() {return categories;}
-    public void setCategories(ArrayList<Category> categories) {this.categories = categories;}
+    public void setCategories(List<Category> categories) {this.categories = categories;}
 
     @Column(name="askingPrice")
     public Double getAskingPrice() {return askingPrice;}
