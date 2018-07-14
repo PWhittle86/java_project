@@ -4,6 +4,7 @@ import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name= "adverts")
@@ -12,7 +13,7 @@ public class Advert {
     private int id;
     private String advertTitle;
     private String advertDescription;
-//    private ArrayList<Categories> categories;
+    private List<Category> categories;
     private Double askingPrice;
     private User advertOwner;
 
@@ -22,7 +23,7 @@ public class Advert {
     public Advert(String advertTitle, String advertDescription, Double askingPrice, User advertOwner) {
         this.advertTitle = advertTitle;
         this.advertDescription = advertDescription;
-//        this.categories = new ArrayList<Categories>();
+        this.categories = new ArrayList<Category>();
         this.askingPrice = askingPrice;
         this.advertOwner = advertOwner;
     }
@@ -41,10 +42,17 @@ public class Advert {
     public String getAdvertDescription() {return advertDescription;}
     public void setAdvertDescription(String advertDescription) {this.advertDescription = advertDescription;}
 
-    //Leaving the category stuff commented out until everything else is working.
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @ManyToMany
+    @JoinTable(name = "advert_category",
+            joinColumns = {
+                    @JoinColumn(name = "advert_id", nullable = false, updatable = false)
+            },
+            inverseJoinColumns = {@JoinColumn(name = "category_id", nullable = false, updatable = false)}
+    )
 
-//    public ArrayList<Categories> getCategories() {return categories;}
-//    public void setCategories(ArrayList<Categories> categories) {this.categories = categories;}
+    public List<Category> getCategories() {return categories;}
+    public void setCategories(ArrayList<Category> categories) {this.categories = categories;}
 
     @Column(name="askingPrice")
     public Double getAskingPrice() {return askingPrice;}
@@ -54,4 +62,8 @@ public class Advert {
     @JoinColumn(name="user_id", nullable= false)
     public User getAdvertOwner() {return advertOwner;}
     public void setAdvertOwner(User advertOwner) {this.advertOwner = advertOwner;}
+
+    public void addCategory(Category category){
+        this.categories.add(category);
+    }
 }

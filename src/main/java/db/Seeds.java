@@ -33,5 +33,17 @@ public class Seeds {
         DBHelper.save(advert3);
         DBHelper.save(advert4);
 
+        Category category = new Category("Fashion");
+        Category category1 = new Category("Home & Garden");
+        Category category2 = new Category("Electronics");
+        Category category3 = new Category("Sports & Leisure");
+        Category category4 = new Category("Health & Beauty");
+        DBHelper.save(category);
+        DBHelper.save(category1);
+        DBHelper.save(category2);
+        DBHelper.save(category3);
+        DBHelper.save(category4);
+
+        DBHelper.addCategoryToAdvert(category, advert);
     }
 }

@@ -1,8 +1,11 @@
 package db;
 
+import models.Advert;
+import models.Category;
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class DBHelper {
@@ -102,4 +105,12 @@ public class DBHelper {
         return getUnique(cr);
 
     }
+
+    public static void  addCategoryToAdvert(Category category, Advert advert){
+        category.addAdvert(advert);
+        advert.addCategory(category);
+        DBHelper.save(category);
+    }
+
+
 }
