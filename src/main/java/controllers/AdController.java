@@ -4,9 +4,12 @@ import db.DBHelper;
 import models.Advert;
 import models.Category;
 import models.User;
+import org.hibernate.type.ImageType;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
+import java.awt.*;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,8 +85,8 @@ public class AdController {
             String advertTitle = req.queryParams("advertTitle");
             String advertDescription = req.queryParams("advertDescription");
             double askingPrice = Double.parseDouble(req.queryParams("askingPrice"));
-
-            Advert newAdvert = new Advert(advertTitle, advertDescription, askingPrice, user);
+            String imagePath = req.queryParams("advertImage");
+            Advert newAdvert = new Advert(advertTitle, advertDescription, askingPrice, user, imagePath);
             newAdvert.addCategory(category);
             category.addAdvert(newAdvert);
             DBHelper.save(newAdvert);

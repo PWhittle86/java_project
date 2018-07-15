@@ -1,6 +1,7 @@
 package models;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.type.ImageType;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,16 +17,18 @@ public class Advert {
     private List<Category> categories;
     private Double askingPrice;
     private User advertOwner;
+    private String imagePath;
 
     public Advert() {
     }
 
-    public Advert(String advertTitle, String advertDescription, Double askingPrice, User advertOwner) {
+    public Advert(String advertTitle, String advertDescription, Double askingPrice, User advertOwner, String imagePath) {
         this.advertTitle = advertTitle;
         this.advertDescription = advertDescription;
         this.categories = new ArrayList<Category>();
         this.askingPrice = askingPrice;
         this.advertOwner = advertOwner;
+        this.imagePath = imagePath;
     }
 
     @Id
@@ -85,6 +88,17 @@ public class Advert {
     public User getAdvertOwner() {
         return advertOwner;
     }
+
+    @Column(name = "image")
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+
 
     public void setAdvertOwner(User advertOwner) {
         this.advertOwner = advertOwner;

@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 
 public class DBAdvert {
@@ -14,20 +16,19 @@ public class DBAdvert {
     private static Session session;
     private static Transaction transaction;
 
-    public static List<Advert> findAdvertsByName(String searchCriteria){
+    public static List<Advert> findAdvertsByName(String searchCriteria) {
         session = HibernateUtil.getSessionFactory().openSession();
         List<Advert> foundAdverts = null;
 
-        try{
+        try {
             Criteria cr = session.createCriteria(Advert.class);
             cr.add(Restrictions.like("advertTitle", searchCriteria));
             foundAdverts = cr.list();
-        }catch(HibernateException e){
+        } catch (HibernateException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             session.close();
         }
         return foundAdverts;
     }
-
 }

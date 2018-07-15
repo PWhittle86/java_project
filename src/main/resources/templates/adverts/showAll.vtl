@@ -6,10 +6,21 @@
         <input id='search' type="text" placeholder="Search ads..." name='searchCriteria'>
     </form>
 
-    <ul>
+    <table>
+        <tr>
+            <th>Project Title</th>
+            <th></th>
+        </tr>
+
         #foreach ($advert in $allAdverts)
-        <li><a href="/adverts/$advert.getId()">$advert.getAdvertTitle()</a></li>
+        <tr>
+        <td><a href="/adverts/$advert.getId()">$advert.getAdvertTitle()</a></td>
+        <td><img src="public/images/bobplace.jpg" alt="$advert.getAdvertTitle()"></td>
+        </tr>
         #end
-    </ul>
+
+    </table>
+
+
 
 </div>
