@@ -67,6 +67,11 @@ public class AdController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+        get("/adverts/search", (req, res) -> {
+           String searchCriteria = req.queryParams("searchCriteria");
+
+        });
+
         post("/adverts/new", (req, res) -> {
             int userId = Integer.parseInt(req.queryParams("advertOwner"));
             User user = DBHelper.find(userId, User.class);

@@ -2,6 +2,10 @@
 
 <div class="advertList">
 
+    <form method='get' action='/adverts/search'>
+        <input id='search' type="text" placeholder="Search ads..." name='searchCriteria'>
+    </form>
+
     <ul>
         #foreach ($advert in $allAdverts)
         <li><a href="/adverts/$advert.getId()">$advert.getAdvertTitle()</a></li>
