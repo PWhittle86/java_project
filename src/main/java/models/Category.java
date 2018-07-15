@@ -33,7 +33,7 @@ public class Category {
     public void setCategoryName(String categoryName) {this.categoryName = categoryName;}
 
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "advert_category",
             joinColumns = {@JoinColumn(name = "category_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "advert_id", nullable = false, updatable = false)})

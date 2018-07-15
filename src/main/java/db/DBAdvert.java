@@ -38,7 +38,7 @@ public class DBAdvert {
         try{
             Criteria cr = session.createCriteria(Advert.class);
             cr.createAlias("categories", "category");
-            cr.add(Restrictions.eq("category", category));
+            cr.add(Restrictions.eq("category.id", category.getId()));
             foundAdverts = cr.list();
         }catch(HibernateException e){
             e.printStackTrace();

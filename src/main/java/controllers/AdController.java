@@ -9,6 +9,7 @@ import org.dom4j.rule.Mode;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -108,9 +109,14 @@ public class AdController {
 
             Advert newAdvert = new Advert(advertTitle, advertDescription, askingPrice, user);
             newAdvert.addCategory(category);
-            category.addAdvert(newAdvert);
+
+            List<Advert> newAdvertCategory = new ArrayList<Advert>(); //Manually creating a new adverts arraylist in order to be able to add a category. Workaround.
+            newAdvertCategory.add(newAdvert);
+
+//            category.addAdvert(newAdvert);
+
+            category.setAdverts(newAdvertCategory);
             DBHelper.save(newAdvert);
-//            DBHelper.addCategoryToAdvert(category, newAdvert);
 
             res.redirect("/adverts");
             return null;

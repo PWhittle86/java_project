@@ -40,7 +40,6 @@ public class Advert {
     }
 
     @Column(name = "advertTitle")
-    //Jack, should we be including DB entries for this and description? Seems like it might be a really big table entry... Added them for now, not sure they should be in the table?
     public String getAdvertTitle() {
         return advertTitle;
     }
@@ -58,6 +57,7 @@ public class Advert {
         this.advertDescription = advertDescription;
     }
 
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @ManyToMany
     @JoinTable(name = "advert_category",
             joinColumns = {@JoinColumn(name = "advert_id", nullable = false, updatable = false)},

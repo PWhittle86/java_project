@@ -44,7 +44,6 @@ public class Seeds {
         DBHelper.save(sportsAndLeisure);
         DBHelper.save(healthAndBeauty);
 
-
         DBHelper.addCategoryToAdvert(fashion, advert);
         DBHelper.addCategoryToAdvert(electronics, advert1);
         DBHelper.addCategoryToAdvert(sportsAndLeisure, advert2);
