@@ -103,12 +103,13 @@ public class DBHelper {
         Criteria cr = session.createCriteria(classType);
         cr.add(Restrictions.eq("id", id));
         return getUnique(cr);
-
     }
 
     public static void addCategoryToAdvert(Category category, Advert advert){
         category.addAdvert(advert);
+        advert.addCategory(category);
         DBHelper.save(category);
+        DBHelper.save(advert);
     }
 
 

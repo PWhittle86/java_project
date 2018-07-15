@@ -33,17 +33,23 @@ public class Seeds {
         DBHelper.save(advert3);
         DBHelper.save(advert4);
 
-        Category category = new Category("Fashion");
-        Category category1 = new Category("Home & Garden");
-        Category category2 = new Category("Electronics");
-        Category category3 = new Category("Sports & Leisure");
-        Category category4 = new Category("Health & Beauty");
-        DBHelper.save(category);
-        DBHelper.save(category1);
-        DBHelper.save(category2);
-        DBHelper.save(category3);
-        DBHelper.save(category4);
+        Category fashion = new Category("Fashion");
+        Category homeAndGarden = new Category("Home & Garden");
+        Category electronics = new Category("Electronics");
+        Category sportsAndLeisure = new Category("Sports & Leisure");
+        Category healthAndBeauty = new Category("Health & Beauty");
+        DBHelper.save(fashion);
+        DBHelper.save(homeAndGarden);
+        DBHelper.save(electronics);
+        DBHelper.save(sportsAndLeisure);
+        DBHelper.save(healthAndBeauty);
 
-        DBHelper.addCategoryToAdvert(category, advert);
+
+        DBHelper.addCategoryToAdvert(fashion, advert);
+        DBHelper.addCategoryToAdvert(electronics, advert1);
+        DBHelper.addCategoryToAdvert(sportsAndLeisure, advert2);
+        DBHelper.addCategoryToAdvert(homeAndGarden, advert3);
+        DBHelper.addCategoryToAdvert(sportsAndLeisure, advert4);
+
     }
 }

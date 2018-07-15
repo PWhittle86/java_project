@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaProjectDB</title>
+    <link href="/style.css" rel="stylesheet" type="text/css" />
+    <a href="/adverts">Home</a>
+    <a href="/adverts/new">New Advert</a>
+</head>
+<nav>
+    #foreach ($category in $allCategories)
+    <a href="/adverts/category/$category.getId()">$category.getCategoryName()</a>
+    #end
+</nav>
+<body>
+<!-- begin inner template-->
+<div class="container">
+    #parse( $template )
+</div>
+<!-- end inner template-->
+</body>
+</html>

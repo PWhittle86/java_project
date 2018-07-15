@@ -1,0 +1,11 @@
+<p class="pageHeader">$category</p>
+
+<div class="advertList">
+
+    <ul>
+        #foreach ($advert in $categorisedAdverts)
+        <li><a href="/adverts/$advert.getId()">$advert.getAdvertTitle()</a></li>
+        #end
+    </ul>
+
+</div>

@@ -1,4 +1,4 @@
-<p class="pageHeader">All Adverts</p>
+<p class="pageHeader">Found Adverts</p>
 
 <div class="advertList">
 
@@ -7,7 +7,7 @@
     </form>
 
     <ul>
-        #foreach ($advert in $allAdverts)
+        #foreach ($advert in $advertsList)
         <li><a href="/adverts/$advert.getId()">$advert.getAdvertTitle()</a></li>
         #end
     </ul>

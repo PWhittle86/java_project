@@ -1,6 +1,7 @@
 package db;
 
 import models.Advert;
+import models.Category;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -29,5 +30,23 @@ public class DBAdvert {
         }
         return foundAdverts;
     }
+
+    public static List<Advert> findAdvertsByCategory(Category category){
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Advert> foundAdverts = null;
+
+        try{
+            Criteria cr = session.createCriteria(Advert.class);
+            cr.createAlias("categories", "category");
+            cr.add(Restrictions.eq("category", category));
+            foundAdverts = cr.list();
+        }catch(HibernateException e){
+            e.printStackTrace();
+        }finally{
+            session.close();
+        }
+        return foundAdverts;
+    }
+
 
 }

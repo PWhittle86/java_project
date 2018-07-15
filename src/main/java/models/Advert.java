@@ -58,7 +58,6 @@ public class Advert {
         this.advertDescription = advertDescription;
     }
 
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @ManyToMany
     @JoinTable(name = "advert_category",
             joinColumns = {@JoinColumn(name = "advert_id", nullable = false, updatable = false)},

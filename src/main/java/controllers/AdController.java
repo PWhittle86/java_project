@@ -1,9 +1,11 @@
 package controllers;
 
+import db.DBAdvert;
 import db.DBHelper;
 import models.Advert;
 import models.Category;
 import models.User;
+import org.dom4j.rule.Mode;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
@@ -27,10 +29,12 @@ public class AdController {
         get("/adverts", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Advert> allAdverts = DBHelper.getAll(Advert.class);
+            List<Category> allCategories = DBHelper.getAll(Category.class);
+
+            model.put("allCategories", allCategories);
             model.put("allAdverts", allAdverts);
             model.put("template", "templates/adverts/showAll.vtl");
-
-            return new ModelAndView(model, "templates/layout.vtl");
+            return new ModelAndView(model, "templates/homepageLayout.vtl");
             }, new VelocityTemplateEngine());
 
         get("/adverts/new", (req, res) -> {
@@ -54,6 +58,19 @@ public class AdController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+        get("/adverts/category/:id", (req, res) -> {
+            int categoryId = Integer.parseInt(req.params(":id"));
+            Category category = DBHelper.find(categoryId, Category.class);
+            List<Advert> categorisedAdverts = DBAdvert.findAdvertsByCategory(category);
+            Map<String, Object> model = new HashMap<>();
+
+            model.put("category", category.getCategoryName());
+            model.put("categorisedAdverts", categorisedAdverts);
+            model.put("template", "templates/adverts/showCategorisedAdverts.vtl");
+
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
         get("/adverts/update/:id", (req, res) -> {
             int advertId = Integer.parseInt(req.params(":id"));
             Advert advert = DBHelper.find(advertId, Advert.class);
@@ -67,10 +84,16 @@ public class AdController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        get("/adverts/search", (req, res) -> {
-           String searchCriteria = req.queryParams("searchCriteria");
+        get("/adverts/search", (req, res) -> { //Doesn't work at the moment. Query instructors on Monday.
+            String searchCriteria = req.queryParams("searchCriteria");
+            List<Advert> advertsList = DBAdvert.findAdvertsByName(searchCriteria);
 
-        });
+            Map<String, Object> model = new HashMap<>();
+            model.put("advertsList", advertsList);
+            model.put("template", "templates/adverts/foundAdverts.vtl");
+
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
 
         post("/adverts/new", (req, res) -> {
             int userId = Integer.parseInt(req.queryParams("advertOwner"));
