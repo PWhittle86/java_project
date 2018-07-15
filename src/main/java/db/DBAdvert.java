@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class DBAdvert {
 
         try{
             Criteria cr = session.createCriteria(Advert.class);
-            cr.add(Restrictions.like("advertTitle", searchCriteria));
+            cr.add(Restrictions.ilike("advertTitle", searchCriteria, MatchMode.ANYWHERE));
             foundAdverts = cr.list();
         }catch(HibernateException e){
             e.printStackTrace();

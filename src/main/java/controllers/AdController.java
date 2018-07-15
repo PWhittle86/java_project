@@ -85,7 +85,7 @@ public class AdController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        get("/adverts/search", (req, res) -> { //Doesn't work at the moment. Query instructors on Monday.
+        get("/adverts/search/", (req, res) -> { //Doesn't work at the moment. Query instructors on Monday.
             String searchCriteria = req.queryParams("searchCriteria");
             List<Advert> advertsList = DBAdvert.findAdvertsByName(searchCriteria);
 
