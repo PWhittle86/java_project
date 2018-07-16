@@ -1,5 +1,7 @@
 package controllers;
 
+import com.qmetric.spark.authentication.AuthenticationDetails;
+import com.qmetric.spark.authentication.BasicAuthenticationFilter;
 import db.DBHelper;
 import db.DBUser;
 import models.Advert;
@@ -15,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static spark.Spark.before;
 import static spark.Spark.get;
 import static spark.Spark.post;
 
@@ -25,6 +28,8 @@ public class UserController {
     }
 
     private void setupEndPoints(){
+
+
 
         get("/users/new", (req, res)->{
             Map<String, Object> model = new HashMap<>();
