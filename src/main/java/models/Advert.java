@@ -16,6 +16,7 @@ public class Advert {
     private List<Category> categories;
     private Double askingPrice;
     private User advertOwner;
+    private List<User> favouritedBy;
 
     public Advert() {
     }
@@ -26,24 +27,19 @@ public class Advert {
         this.categories = new ArrayList<Category>();
         this.askingPrice = askingPrice;
         this.advertOwner = advertOwner;
+        this.favouritedBy = new ArrayList<User>();
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    public int getId() {return id;}
+    public void setId(int id) {this.id = id;}
 
     @Column(name = "advertTitle")
     public String getAdvertTitle() {
         return advertTitle;
     }
-
     public void setAdvertTitle(String advertTitle) {
         this.advertTitle = advertTitle;
     }
@@ -52,7 +48,6 @@ public class Advert {
     public String getAdvertDescription() {
         return advertDescription;
     }
-
     public void setAdvertDescription(String advertDescription) {
         this.advertDescription = advertDescription;
     }
@@ -65,7 +60,6 @@ public class Advert {
     public List<Category> getCategories() {
         return categories;
     }
-
     public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
@@ -74,7 +68,6 @@ public class Advert {
     public Double getAskingPrice() {
         return askingPrice;
     }
-
     public void setAskingPrice(Double askingPrice) {
         this.askingPrice = askingPrice;
     }
@@ -84,12 +77,21 @@ public class Advert {
     public User getAdvertOwner() {
         return advertOwner;
     }
-
     public void setAdvertOwner(User advertOwner) {
         this.advertOwner = advertOwner;
     }
 
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @ManyToMany
+    @JoinTable(name="user_advert",
+            joinColumns = {@JoinColumn(name = "advert_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)}
+    )
+    public List<User> getFavouritedBy() {return favouritedBy;}
+    public void setFavouritedBy(List<User> favouritedBy) {this.favouritedBy = favouritedBy;}
+
     public void addCategory(Category category) {
         this.categories.add(category);
     }
+
 }
