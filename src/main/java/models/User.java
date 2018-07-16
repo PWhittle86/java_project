@@ -17,7 +17,9 @@ public class User {
 
 
     public User() {
+
     }
+
     public User(String username) {
         this.username = username;
         this.userAdverts =  new ArrayList<Advert>();
@@ -38,8 +40,7 @@ public class User {
     public List<Advert> getUserAdverts() {return userAdverts;}
     public void setUserAdverts(List<Advert> userAdverts) {this.userAdverts = userAdverts;}
 
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @ManyToMany(fetch = FetchType.EAGER) //Had to implement this so that favourite adverts were being added.
+    @ManyToMany
     @JoinTable(name="user_advert",
             joinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "advert_id", nullable = false, updatable = false)}

@@ -2,6 +2,7 @@ package db;
 
 import models.Advert;
 import models.Category;
+import models.User;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -50,4 +51,20 @@ public class DBAdvert {
     }
 
 
+    public static List<User> findFavouritedBy(Advert advert) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<User> results = null;
+        try {
+            Criteria cr = session.createCriteria(User.class);
+
+            cr.createAlias("favouriteAdverts", "advert");
+            cr.add(Restrictions.eq("advert.id", advert.getId()));
+            results = cr.list();
+        }catch (HibernateException e){
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return results;
+    }
 }

@@ -1,5 +1,6 @@
 package models;
 
+import org.hibernate.FetchMode;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
@@ -81,8 +82,7 @@ public class Advert {
         this.advertOwner = advertOwner;
     }
 
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @ManyToMany(fetch = FetchType.EAGER) //Had to implement this so that favourite users were being added.
+    @ManyToMany
     @JoinTable(name="user_advert",
             joinColumns = {@JoinColumn(name = "advert_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)}

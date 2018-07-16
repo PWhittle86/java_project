@@ -43,4 +43,16 @@ public class DBUser {
         return result;
     }
 
+    public static void addToUserFavourites(User user, Advert advert){
+        user.setFavouriteAdverts(getUsersFavAdverts(user));
+        user.addFavouriteAdvert(advert);
+
+        advert.setFavouritedBy(DBAdvert.findFavouritedBy(advert));
+        advert.addUserFavourite(user);
+
+        DBHelper.save(user);
+        DBHelper.save(advert);
+
+    }
+
 }
