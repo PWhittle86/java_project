@@ -96,9 +96,9 @@ public class AdController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        get("/adverts/confirmUser", (req, res) -> {
-
-        })
+//        get("/adverts/confirmUser", (req, res) -> {
+//            int advertId = Integer.parseInt((req.queryParams()))
+//        })
 
         post("/adverts/new", (req, res) -> {
             int userId = Integer.parseInt(req.queryParams("advertOwner"));
