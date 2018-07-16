@@ -42,6 +42,7 @@ public class AdController {
             Map<String, Object> model = new HashMap<>();
             List<User> allUsers = DBHelper.getAll(User.class);
             List<Category> categories = DBHelper.getAll(Category.class);
+
             model.put("categories", categories);
             model.put("allUsers", allUsers);
             model.put("template", "templates/adverts/createAdvert.vtl");
@@ -165,7 +166,19 @@ public class AdController {
 
         post("/adverts/confirmFavourite/:id", (req, res) -> {
             int advertId = Integer.parseInt(req.params(":id"));
-        })
+            Advert favAdvert = DBHelper.find(advertId, Advert.class);
+
+            int userId = Integer.parseInt(req.queryParams("selectedUser"));
+            User selectedUser = DBHelper.find(userId, User.class);
+
+            int debugPoint = 0;
+
+            selectedUser.addFavouriteAdvert(favAdvert);
+            favAdvert.addUserFavourite(selectedUser);
+
+            res.redirect("/users"); //Might change this later so that it points to the user's favourite adverts, once it has been implemented.
+            return null;
+        }, new VelocityTemplateEngine());
 
     }
 

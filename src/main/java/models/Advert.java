@@ -82,7 +82,7 @@ public class Advert {
     }
 
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER) //Had to implement this so that favourite users were being added.
     @JoinTable(name="user_advert",
             joinColumns = {@JoinColumn(name = "advert_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)}
@@ -94,4 +94,7 @@ public class Advert {
         this.categories.add(category);
     }
 
+    public void addUserFavourite(User user){
+        favouritedBy.add(user);
+    }
 }

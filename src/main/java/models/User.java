@@ -39,11 +39,15 @@ public class User {
     public void setUserAdverts(List<Advert> userAdverts) {this.userAdverts = userAdverts;}
 
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER) //Had to implement this so that favourite adverts were being added.
     @JoinTable(name="user_advert",
             joinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "advert_id", nullable = false, updatable = false)}
     )
     public List<Advert> getFavouriteAdverts() {return favouriteAdverts;}
     public void setFavouriteAdverts(List<Advert> favouriteAdverts) {this.favouriteAdverts = favouriteAdverts;}
+
+    public void addFavouriteAdvert(Advert advert){
+        favouriteAdverts.add(advert);
+    }
 }

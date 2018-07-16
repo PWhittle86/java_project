@@ -63,6 +63,14 @@ public class UserController {
             return  new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+        get("/users/:id/favouriteads", (req, res)-> {
+            String userId = req.params(":id");
+            User foundUser = DBHelper.find(userId, User.class);
+            List<Advert> =
+
+
+                });
+
         post("/users",(req, res)->{
             String username = req.queryParams("username");
             User newUser = new User(username);
