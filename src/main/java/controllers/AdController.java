@@ -117,8 +117,6 @@ public class AdController {
             List<Advert> newAdvertCategory = new ArrayList<Advert>(); //Manually creating a new adverts arraylist in order to be able to add a category. Workaround.
             newAdvertCategory.add(newAdvert);
 
-//            category.addAdvert(newAdvert);
-
             category.setAdverts(newAdvertCategory);
             DBHelper.save(newAdvert);
 
