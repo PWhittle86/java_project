@@ -91,7 +91,6 @@ public class AdController {
             category.addAdvert(newAdvert);
             DBHelper.save(newAdvert);
 //            DBHelper.addCategoryToAdvert(category, newAdvert);
-
             res.redirect("/adverts");
             return null;
         }, new VelocityTemplateEngine());

@@ -15,7 +15,7 @@
         #foreach ($advert in $allAdverts)
         <tr>
         <td><a href="/adverts/$advert.getId()">$advert.getAdvertTitle()</a></td>
-        <td><img src="public/images/bobplace.jpg" alt="$advert.getAdvertTitle()"></td>
+        <td><img src="$advert.getImagePath()" alt="$advert.getAdvertTitle()"></td>
         </tr>
         #end
 

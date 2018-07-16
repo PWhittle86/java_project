@@ -21,12 +21,12 @@ public class Seeds {
         User user2 = new User("Adri");
         DBHelper.save(user2);
 
-        Advert advert = new Advert("old shoes", "old nikes mate, worn 600 times", 10.0, user, "");
+        Advert advert = new Advert("old shoes", "old nikes mate, worn 600 times", 10.0, user, "/images/bobplace.jpg");
         user.getUserAdverts().add(advert);
-        Advert advert1 = new Advert("Ps4", "ps4 with 2 controllers, 3 games", 100.05, user, "public/images/bobplace.jpg");
-        Advert advert2 = new Advert("BIKE", "old fixy in good nick, one flat tire",76.80, user1, "public/images/bobplace.jpg");
-        Advert advert3 = new Advert("03 Corsa 150,000 miles", "good run around", 500.00, user1, "public/images/bobplace.jpg");
-        Advert advert4 = new Advert("Old Boat", "very nice boat, need a lake", 2000.00, user2, "public/images/bobplace.jpg");
+        Advert advert1 = new Advert("Ps4", "ps4 with 2 controllers, 3 games", 100.05, user, "/images/bobplace.jpg");
+        Advert advert2 = new Advert("BIKE", "old fixy in good nick, one flat tire",76.80, user1, "/images/bobplace.jpg");
+        Advert advert3 = new Advert("03 Corsa 150,000 miles", "good run around", 500.00, user1, "/images/bobplace.jpg");
+        Advert advert4 = new Advert("Old Boat", "very nice boat, need a lake", 2000.00, user2, "/images/bobplace.jpg");
         DBHelper.save(advert);
         DBHelper.save(advert1);
         DBHelper.save(advert2);
