@@ -96,9 +96,18 @@ public class AdController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-//        get("/adverts/confirmUser", (req, res) -> {
-//            int advertId = Integer.parseInt((req.queryParams()))
-//        })
+        get("/adverts/confirmUser/:id", (req, res) -> {
+            int advertId = Integer.parseInt(req.params(":id"));
+            Advert advert = DBHelper.find(advertId, Advert.class);
+            List<User> allUsers = DBHelper.getAll(User.class);
+
+            Map<String, Object> model = new HashMap<>();
+            model.put("advert", advert);
+            model.put("allUsers", allUsers);
+            model.put("template", "templates/adverts/confirmUser.vtl");
+
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
 
         post("/adverts/new", (req, res) -> {
             int userId = Integer.parseInt(req.queryParams("advertOwner"));
@@ -153,6 +162,10 @@ public class AdController {
             res.redirect("/adverts");
             return null;
         }, new VelocityTemplateEngine());
+
+        post("/adverts/confirmFavourite/:id", (req, res) -> {
+            int advertId = Integer.parseInt(req.params(":id"));
+        })
 
     }
 

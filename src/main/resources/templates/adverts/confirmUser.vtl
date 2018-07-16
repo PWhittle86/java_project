@@ -1,0 +1,13 @@
+<p class="pageHeader">Select A User</p>
+
+<form action="/adverts/confirmFavourite/$advert.getId()" method="post">
+
+    <label for="selectedUser">Advert Owner:</label>
+    <select id="selectedUser" name="selectedUser">
+        #foreach($user in $allUsers)
+        <option value="$user.getId()">$user.getUsername()</option>
+        #end
+    </select>
+    <input type="submit" value="Confirm" class="button">
+
+</form>
