@@ -26,4 +26,21 @@ public class DBUser {
         }
         return result;
     }
+
+    public static List<Advert> getUsersFavAdverts(User user){
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Advert> result = null;
+        try {
+            Criteria cr = session.createCriteria(Advert.class);
+            cr.createAlias("favouritedBy", "user");
+            cr.add(Restrictions.eq("user.id", user.getId()));
+            result = cr.list();
+        }catch (HibernateException e){
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return result;
+    }
+
 }

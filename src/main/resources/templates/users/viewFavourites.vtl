@@ -1,0 +1,11 @@
+<p class="pageHeader">$foundUser.getUsername()'s Favourite Adverts</p>
+
+<div class="advertList">
+
+    <ul>
+        #foreach ($advert in $favAdverts)
+        <li><a href="/adverts/$advert.getId()">$advert.getAdvertTitle()</a></li>
+        #end
+    </ul>
+
+</div>

@@ -64,12 +64,17 @@ public class UserController {
         }, new VelocityTemplateEngine());
 
         get("/users/:id/favouriteads", (req, res)-> {
-            String userId = req.params(":id");
+            int userId = Integer.parseInt(req.params(":id"));
             User foundUser = DBHelper.find(userId, User.class);
-            List<Advert> =
+            List<Advert> favAdverts = DBUser.getUsersFavAdverts(foundUser);
 
+            Map<String, Object> model = new HashMap<>();
+            model.put("favAdverts", favAdverts);
+            model.put("foundUser", foundUser);
+            model.put("template", "templates/users/viewFavourites.vtl");
 
-                });
+            return new ModelAndView(model, "templates/layout.vtl");
+                }, new VelocityTemplateEngine());
 
         post("/users",(req, res)->{
             String username = req.queryParams("username");
