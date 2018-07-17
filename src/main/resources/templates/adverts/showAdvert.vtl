@@ -15,4 +15,11 @@
     <form action="/adverts/confirmUser/$advert.getId()" method="get">
         <input type="submit" value="Add To Favourites" class="button">
     </form>
+
+    <div class="comment-box">
+        #foreach ($comment in $comments)
+        <p class="comment"><a href="/users/$comment.getUser().getId()">$comment.getUser().getUsername()</a>: $comment.getComment()</p>
+        #end
+
+    </div>
 </div>

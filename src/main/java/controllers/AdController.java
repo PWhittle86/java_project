@@ -1,10 +1,12 @@
 package controllers;
 
 import db.DBAdvert;
+import db.DBComment;
 import db.DBHelper;
 import db.DBUser;
 import models.Advert;
 import models.Category;
+import models.Comment;
 import models.User;
 import org.dom4j.rule.Mode;
 import spark.ModelAndView;
@@ -53,8 +55,9 @@ public class AdController {
         get("/adverts/:id", (req, res) -> {
             int advertId = Integer.parseInt(req.params(":id"));
             Advert advert = DBHelper.find(advertId, Advert.class);
+            List<Comment> comments = DBComment.findAdvertComments(advert);
             Map<String, Object> model = new HashMap<>();
-
+            model.put("comments", comments);
             model.put("advert", advert);
             model.put("template", "templates/adverts/showAdvert.vtl");
 

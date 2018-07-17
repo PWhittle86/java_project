@@ -11,6 +11,13 @@
     <a href="/users/$foundUser.getId()/edit">Edit</a>
     <a href="/users/$foundUser.getId()/favouriteads">View Favourite Ads</a>
 
+    <div class="comment-box">
+        <p class="commentHeader">Comment History</p>
+        #foreach ($comment in $comments)
+        <p class="comment"><a href="/advert/$comment.getAdvert().getId()">$comment.getAdvert().getAdvertTitle()</a>: $comment.getComment()</p>
+        #end
+    </div>
+
 </div>
 
 

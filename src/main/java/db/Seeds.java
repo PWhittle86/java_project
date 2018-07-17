@@ -8,6 +8,7 @@ public class Seeds {
         DBHelper.deleteAll(Advert.class);
         DBHelper.deleteAll(User.class);
         DBHelper.deleteAll(Category.class);
+        DBHelper.deleteAll(Comment.class);
 
         ShopFront shopFront = new ShopFront();
 
