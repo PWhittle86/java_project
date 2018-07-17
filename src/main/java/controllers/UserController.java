@@ -78,7 +78,8 @@ public class UserController {
 
         post("/users",(req, res)->{
             String username = req.queryParams("username");
-            String userImage = req.queryParams("userImage");
+            String userImage = "/seedImages/" + req.queryParams("imageLocation");
+
             User newUser = new User(username, userImage);
             DBHelper.save(newUser);
             res.redirect("/users");
@@ -90,8 +91,10 @@ public class UserController {
             Integer id = Integer.parseInt(strId);
             User user = DBHelper.find(id, User.class);
             String username = req.queryParams("username");
+            String imageLocation = req.queryParams("imageLocation");
 
             user.setUsername(username);
+            user.setUserImage("/seedImages/" + imageLocation);
             DBHelper.save(user);
             res.redirect("/users");
             return null;

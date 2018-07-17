@@ -173,10 +173,7 @@ public class AdController {
             int userId = Integer.parseInt(req.queryParams("selectedUser"));
             User selectedUser = DBHelper.find(userId, User.class);
 
-            int debugpoint = 0;
-
             DBUser.addToUserFavourites(selectedUser, favAdvert);
-
 
             res.redirect("/users"); //Might change this later so that it points to the user's favourite adverts, once it has been implemented.
             return null;
