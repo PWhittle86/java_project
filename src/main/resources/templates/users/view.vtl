@@ -15,6 +15,9 @@
         <p class="commentHeader">Comment History</p>
         #foreach ($comment in $comments)
         <p class="comment"><a href="/adverts/$comment.getAdvert().getId()">$comment.getAdvert().getAdvertTitle()</a>: $comment.getComment()</p>
+        <form action="/users/delete/comment/$comment.getId()" method="post">
+            <input type="submit" value="Delete" class="button">
+        </form>
         #end
     </div>
 

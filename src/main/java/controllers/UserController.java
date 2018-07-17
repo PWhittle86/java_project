@@ -99,6 +99,16 @@ public class UserController {
             res.redirect("/users");
             return null;
         }, new VelocityTemplateEngine());
+
+        post("/users/delete/comment/:id", (req, res)->{
+            String strId = req.params(":id");
+            Integer id = Integer.parseInt(strId);
+            Comment comment = DBHelper.find(id, Comment.class);
+            DBHelper.delete(comment);
+            res.redirect("/users");
+            return null;
+
+        }, new VelocityTemplateEngine());
     }
 
 }
