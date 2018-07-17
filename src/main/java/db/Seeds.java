@@ -1,9 +1,6 @@
 package db;
 
-import models.Advert;
-import models.Category;
-import models.ShopFront;
-import models.User;
+import models.*;
 
 public class Seeds {
     public static void seedData() {
@@ -49,6 +46,14 @@ public class Seeds {
         DBHelper.addCategoryToAdvert(sportsAndLeisure, advert2);
         DBHelper.addCategoryToAdvert(homeAndGarden, advert3);
         DBHelper.addCategoryToAdvert(sportsAndLeisure, advert4);
+
+        Comment comment = new Comment(advert, user2,"looks really good, do it for £10 cheaper");
+        Comment comment1 = new Comment(advert, user,"Aw hell nah");
+        DBHelper.save(comment);
+        DBHelper.save(comment1);
+        DBComment.advertComment(advert, user2, comment);
+        DBComment.advertComment(advert, user, comment1);
+
 
     }
 }
