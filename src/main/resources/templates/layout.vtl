@@ -14,6 +14,11 @@
     </form>
     <a href="/adverts/new" class="button">New Advert</a>
 </nav>
+<nav class="category-nav">
+    #foreach ($category in $allCategories)
+    <a href="/adverts/category/$category.getId()" class="button">$category.getCategoryName()</a>
+    #end
+</nav>
 <!-- begin inner template-->
 <div class="container">
     #parse( $template )

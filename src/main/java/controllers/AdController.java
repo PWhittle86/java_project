@@ -45,7 +45,6 @@ public class AdController {
             Map<String, Object> model = new HashMap<>();
             List<User> allUsers = DBHelper.getAll(User.class);
             List<Category> categories = DBHelper.getAll(Category.class);
-
             model.put("categories", categories);
             model.put("allUsers", allUsers);
             model.put("template", "templates/adverts/createAdvert.vtl");
@@ -55,9 +54,12 @@ public class AdController {
         get("/adverts/:id", (req, res) -> {
             int advertId = Integer.parseInt(req.params(":id"));
             Advert advert = DBHelper.find(advertId, Advert.class);
+            List<Category> allCategories = DBHelper.getAll(Category.class);
+
             List<User> allUsers = DBHelper.getAll(User.class);
             List<Comment> comments = DBComment.findAdvertComments(advert);
             Map<String, Object> model = new HashMap<>();
+            model.put("allCategories", allCategories);
             model.put("allUsers", allUsers);
             model.put("comments", comments);
             model.put("advert", advert);
@@ -70,7 +72,10 @@ public class AdController {
             int categoryId = Integer.parseInt(req.params(":id"));
             Category category = DBHelper.find(categoryId, Category.class);
             List<Advert> categorisedAdverts = DBAdvert.findAdvertsByCategory(category);
+            List<Category> allCategories = DBHelper.getAll(Category.class);
+
             Map<String, Object> model = new HashMap<>();
+            model.put("allCategories", allCategories);
 
             model.put("category", category.getCategoryName());
             model.put("categorisedAdverts", categorisedAdverts);
@@ -80,10 +85,13 @@ public class AdController {
         }, new VelocityTemplateEngine());
 
         get("/adverts/update/:id", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
             int advertId = Integer.parseInt(req.params(":id"));
             Advert advert = DBHelper.find(advertId, Advert.class);
             List<User> allUsers = DBHelper.getAll(User.class);
-            Map<String, Object> model = new HashMap<>();
+            List<Category> allCategories = DBHelper.getAll(Category.class);
+
+            model.put("allCategories", allCategories);
 
             model.put("allUsers", allUsers);
             model.put("advert", advert);
@@ -97,6 +105,9 @@ public class AdController {
             List<Advert> advertsList = DBAdvert.findAdvertsByName(searchCriteria);
 
             Map<String, Object> model = new HashMap<>();
+            List<Category> allCategories = DBHelper.getAll(Category.class);
+
+            model.put("allCategories", allCategories);
             model.put("advertsList", advertsList);
             model.put("template", "templates/adverts/foundAdverts.vtl");
 
@@ -109,6 +120,9 @@ public class AdController {
             List<User> allUsers = DBHelper.getAll(User.class);
 
             Map<String, Object> model = new HashMap<>();
+            List<Category> allCategories = DBHelper.getAll(Category.class);
+
+            model.put("allCategories", allCategories);
             model.put("advert", advert);
             model.put("allUsers", allUsers);
             model.put("template", "templates/adverts/confirmUser.vtl");

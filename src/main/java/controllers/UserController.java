@@ -4,6 +4,7 @@ import db.DBComment;
 import db.DBHelper;
 import db.DBUser;
 import models.Advert;
+import models.Category;
 import models.Comment;
 import models.User;
 import org.hibernate.Criteria;
@@ -30,6 +31,9 @@ public class UserController {
 
         get("/users/new", (req, res)->{
             Map<String, Object> model = new HashMap<>();
+            List<Category> allCategories = DBHelper.getAll(Category.class);
+
+            model.put("allCategories", allCategories);
             model.put("template", "templates/users/create.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
@@ -37,6 +41,9 @@ public class UserController {
         get("/users", (req, res)->{
             Map<String, Object> model = new HashMap<>();
             List<User> allUsers = DBHelper.getAll(User.class);
+            List<Category> allCategories = DBHelper.getAll(Category.class);
+
+            model.put("allCategories", allCategories);
             model.put("allUsers", allUsers);
             model.put("template", "templates/users/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
@@ -50,6 +57,9 @@ public class UserController {
             User foundUser = DBHelper.find(id, User.class);
             List<Advert> userAdverts = DBUser.getUsersAdverts(foundUser);
             List<Comment> comments = DBComment.findUserComments(foundUser);
+            List<Category> allCategories = DBHelper.getAll(Category.class);
+
+            model.put("allCategories", allCategories);
             model.put("comments", comments);
             model.put("foundUser", foundUser);
             model.put("userAdverts", userAdverts);
@@ -62,6 +72,9 @@ public class UserController {
             Integer id = Integer.parseInt(strId);
             User foundUser = DBHelper.find(id, User.class);
             Map<String, Object> model = new HashMap<>();
+            List<Category> allCategories = DBHelper.getAll(Category.class);
+
+            model.put("allCategories", allCategories);
             model.put("foundUser", foundUser);
             model.put("template", "templates/users/update.vtl");
             return  new ModelAndView(model, "templates/layout.vtl");
@@ -73,6 +86,9 @@ public class UserController {
             List<Advert> favAdverts = DBUser.getUsersFavAdverts(foundUser);
 
             Map<String, Object> model = new HashMap<>();
+            List<Category> allCategories = DBHelper.getAll(Category.class);
+
+            model.put("allCategories", allCategories);
             model.put("favAdverts", favAdverts);
             model.put("foundUser", foundUser);
             model.put("template", "templates/users/viewFavourites.vtl");
