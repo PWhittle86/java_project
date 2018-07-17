@@ -120,7 +120,7 @@ public class AdController {
 
             String advertTitle = req.queryParams("advertTitle");
             String advertDescription = req.queryParams("advertDescription");
-            String advertImage = req.queryParams("advertImage");
+            String advertImage = "/seedImages/" + req.queryParams("imageLocation");
             double askingPrice = Double.parseDouble(req.queryParams("askingPrice"));
 
             Advert newAdvert = new Advert(advertTitle, advertDescription, askingPrice, user, advertImage);
