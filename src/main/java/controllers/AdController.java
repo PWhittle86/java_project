@@ -9,7 +9,18 @@ import models.User;
 import org.dom4j.rule.Mode;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
+import spark.utils.IOUtils;
 
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.http.Part;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +38,9 @@ public class AdController {
     }
 
     private void setupEndPoints(){
+
+        File uploadDir = new File("upload");
+        uploadDir.mkdir(); // create the upload directory if it doesn't exist
 
         get("/adverts", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
@@ -173,14 +187,26 @@ public class AdController {
             int userId = Integer.parseInt(req.queryParams("selectedUser"));
             User selectedUser = DBHelper.find(userId, User.class);
 
-            int debugpoint = 0;
-
             DBUser.addToUserFavourites(selectedUser, favAdvert);
-
 
             res.redirect("/users"); //Might change this later so that it points to the user's favourite adverts, once it has been implemented.
             return null;
         }, new VelocityTemplateEngine());
+
+        post("/adverts/uploadImage/:id", (req, res) -> {
+
+            Path tempFile = Files.createTempFile(uploadDir.toPath(), "", "");
+
+            req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+
+            try (InputStream input = req.raw().getPart("userImage").getInputStream()) {
+                Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
+            }
+
+            return "<h1>You uploaded this image:<h1><img src='" + tempFile.getFileName() + "'>";
+
+        });
+
 
     }
 

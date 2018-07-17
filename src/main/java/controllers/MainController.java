@@ -2,7 +2,7 @@ package controllers;
 
 import db.Seeds;
 
-import static spark.SparkBase.staticFileLocation;
+import static spark.Spark.staticFileLocation;
 
 public class MainController {
 
