@@ -75,6 +75,10 @@ public class Advert {
         this.askingPrice = askingPrice;
     }
 
+    @Column(name= "imageLocation")
+    public String getImageLocation() {return imageLocation;}
+    public void setImageLocation(String imageLocation) {this.imageLocation = imageLocation;}
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     public User getAdvertOwner() {
@@ -91,7 +95,6 @@ public class Advert {
     )
     public List<User> getFavouritedBy() {return favouritedBy;}
     public void setFavouritedBy(List<User> favouritedBy) {this.favouritedBy = favouritedBy;}
-
 
 
     public void addCategory(Category category) {

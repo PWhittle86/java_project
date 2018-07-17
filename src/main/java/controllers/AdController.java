@@ -120,9 +120,10 @@ public class AdController {
 
             String advertTitle = req.queryParams("advertTitle");
             String advertDescription = req.queryParams("advertDescription");
+            String advertImage = req.queryParams("advertImage");
             double askingPrice = Double.parseDouble(req.queryParams("askingPrice"));
 
-            Advert newAdvert = new Advert(advertTitle, advertDescription, askingPrice, user);
+            Advert newAdvert = new Advert(advertTitle, advertDescription, askingPrice, user, advertImage);
             newAdvert.addCategory(category);
 
             List<Advert> newAdvertCategory = new ArrayList<Advert>(); //Manually creating a new adverts arraylist in order to be able to add a category. Workaround.
