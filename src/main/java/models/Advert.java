@@ -19,6 +19,7 @@ public class Advert {
     private User advertOwner;
     private List<User> favouritedBy;
     private String imageLocation;
+    private List<Comment> comments;
 
     public Advert() {
     }
@@ -31,6 +32,7 @@ public class Advert {
         this.advertOwner = advertOwner;
         this.favouritedBy = new ArrayList<User>();
         this.imageLocation = imageLocation;
+        this.comments = new ArrayList<Comment>();
     }
 
     @Id
@@ -96,6 +98,14 @@ public class Advert {
     public List<User> getFavouritedBy() {return favouritedBy;}
     public void setFavouritedBy(List<User> favouritedBy) {this.favouritedBy = favouritedBy;}
 
+    @OneToMany(mappedBy = "advert", fetch = FetchType.LAZY)
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public void addCategory(Category category) {
         this.categories.add(category);
@@ -103,5 +113,9 @@ public class Advert {
 
     public void addUserFavourite(User user){
         favouritedBy.add(user);
+    }
+
+    public void addComment(Comment comment){
+        this.comments.add(comment);
     }
 }

@@ -1,8 +1,10 @@
 package controllers;
 
+import db.DBComment;
 import db.DBHelper;
 import db.DBUser;
 import models.Advert;
+import models.Comment;
 import models.User;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -47,6 +49,8 @@ public class UserController {
             Integer id = Integer.parseInt(strId);
             User foundUser = DBHelper.find(id, User.class);
             List<Advert> userAdverts = DBUser.getUsersAdverts(foundUser);
+            List<Comment> comments = DBComment.findUserComments(foundUser);
+            model.put("comments", comments);
             model.put("foundUser", foundUser);
             model.put("userAdverts", userAdverts);
             model.put("template", "templates/users/view.vtl");
@@ -98,6 +102,16 @@ public class UserController {
             DBHelper.save(user);
             res.redirect("/users");
             return null;
+        }, new VelocityTemplateEngine());
+
+        post("/users/delete/comment/:id", (req, res)->{
+            String strId = req.params(":id");
+            Integer id = Integer.parseInt(strId);
+            Comment comment = DBHelper.find(id, Comment.class);
+            DBHelper.delete(comment);
+            res.redirect("/users");
+            return null;
+
         }, new VelocityTemplateEngine());
     }
 

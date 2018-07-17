@@ -15,6 +15,8 @@ public class User {
     private List<Advert> userAdverts;
     private List<Advert> favouriteAdverts;
     private String userImage;
+    private List<Comment> comments;
+
 
     public User() {
     }
@@ -24,6 +26,7 @@ public class User {
         this.userImage = userImage;
         this.userAdverts =  new ArrayList<Advert>();
         this.favouriteAdverts =  new ArrayList<Advert>();
+        this.comments = new ArrayList<Comment>();
     }
 
     @Id
@@ -52,7 +55,20 @@ public class User {
     public String getUserImage() {return userImage;}
     public void setUserImage(String userImage) {this.userImage = userImage;}
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
     public void addFavouriteAdvert(Advert advert){
         favouriteAdverts.add(advert);
+    }
+
+    public void addComment(Comment comment){
+        this.comments.add(comment);
     }
 }

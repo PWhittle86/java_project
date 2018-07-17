@@ -1,10 +1,12 @@
 package controllers;
 
 import db.DBAdvert;
+import db.DBComment;
 import db.DBHelper;
 import db.DBUser;
 import models.Advert;
 import models.Category;
+import models.Comment;
 import models.User;
 import org.dom4j.rule.Mode;
 import spark.ModelAndView;
@@ -53,8 +55,11 @@ public class AdController {
         get("/adverts/:id", (req, res) -> {
             int advertId = Integer.parseInt(req.params(":id"));
             Advert advert = DBHelper.find(advertId, Advert.class);
+            List<User> allUsers = DBHelper.getAll(User.class);
+            List<Comment> comments = DBComment.findAdvertComments(advert);
             Map<String, Object> model = new HashMap<>();
-
+            model.put("allUsers", allUsers);
+            model.put("comments", comments);
             model.put("advert", advert);
             model.put("template", "templates/adverts/showAdvert.vtl");
 
@@ -178,6 +183,21 @@ public class AdController {
             res.redirect("/users"); //Might change this later so that it points to the user's favourite adverts, once it has been implemented.
             return null;
         }, new VelocityTemplateEngine());
+
+        post("/adverts/comment/:id", (request, response) ->{
+            int advertId = Integer.parseInt(request.params(":id"));
+            Advert advert = DBHelper.find(advertId, Advert.class);
+            int userId = Integer.parseInt(request.queryParams("selectedUser"));
+            User selectedUser = DBHelper.find(userId, User.class);
+            String comment = request.queryParams("comment");
+
+            Comment newComment = new Comment(advert, selectedUser, comment);
+            DBHelper.save(newComment);
+            DBComment.advertComment(advert, selectedUser, newComment);
+
+            response.redirect("/adverts");
+            return null;
+        }, new VelocityTemplateEngine() );
 
     }
 
