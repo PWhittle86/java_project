@@ -4,7 +4,7 @@
 
     <p>Seller's Description: $advert.getAdvertDescription()</p>
     <p>Asking price: $advert.getAskingPrice()</p>
-    <p>Seller's ID: $advert.getAdvertOwner().getUsername()</p>
+    <p>Seller's ID: <a href="/users/$advert.getAdvertOwner().getId()">$advert.getAdvertOwner().getUsername()</a></p>
 
     <form action="/adverts/update/$advert.getId()" method="get">
         <input type="submit" value="Edit" class="button">
