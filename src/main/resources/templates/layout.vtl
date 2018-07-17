@@ -3,10 +3,17 @@
 <head>
     <title>JavaProjectDB</title>
     <link href="/style.css" rel="stylesheet" type="text/css" />
-    <a href="/adverts">Home</a>
-    <a href="/adverts/new">New Advert</a>
+
 </head>
 <body>
+<nav class="main-nav">
+    <a href="/adverts" class="button">Home</a>
+    <a href="/adverts/new" class="button">New Advert</a>
+    <a href="/users" class="button">Users</a>
+    <form method='get' action='/adverts/search/'>
+        <input id='search' type="text" placeholder="Search ads..." name='searchCriteria'>
+    </form>
+</nav>
 <!-- begin inner template-->
 <div class="container">
     #parse( $template )

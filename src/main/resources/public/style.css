@@ -3,20 +3,28 @@ body {
   margin: 0;
 }
 
-.main_nav {
+.main-nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  padding: 0.5em;
   width: 100%;
   background-color: #DBDBDB;
+}
+
+.button {
+  text-decoration: none;
+  padding: 0.5em;
+  color: black;
+}
+
+.button:hover {
+  background-color: #C8C8C8;
 }
 
 .category-nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  padding: 0.5em;
   border-bottom: 0.1em solid #DBDBDB;
 }
 

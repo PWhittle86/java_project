@@ -3,15 +3,23 @@
 <head>
     <title>JavaProjectDB</title>
     <link href="/style.css" rel="stylesheet" type="text/css" />
-    <a href="/adverts">Home</a>
-    <a href="/adverts/new">New Advert</a>
+
 </head>
-<nav>
+<body>
+<nav class="main-nav">
+    <a href="/adverts" class="button">Home</a>
+    <a href="/adverts/new" class="button">New Advert</a>
+    <a href="/users" class="button">Users</a>
+    <form method='get' action='/adverts/search/'>
+        <input id='search' type="text" placeholder="Search ads..." name='searchCriteria'>
+    </form>
+</nav>
+
+<nav class="category-nav">
     #foreach ($category in $allCategories)
-    <a href="/adverts/category/$category.getId()">$category.getCategoryName()</a>
+    <a href="/adverts/category/$category.getId()" class="button">$category.getCategoryName()</a>
     #end
 </nav>
-<body>
 <!-- begin inner template-->
 <div class="container">
     #parse( $template )
