@@ -4,8 +4,12 @@
 
     <ul>
         #foreach ($advert in $categorisedAdverts)
+        <div class="advertBox">
+        <img src="$advert.getImageLocation()">
         <li><a href="/adverts/$advert.getId()">$advert.getAdvertTitle()</a></li>
+        </div>
         #end
+
     </ul>
 
 </div>

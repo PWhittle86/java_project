@@ -2,6 +2,7 @@
 
 <div class="container">
 
+    <img src="$advert.getImageLocation()">
     <p>Seller's Description: $advert.getAdvertDescription()</p>
     <p>Asking price: $advert.getAskingPrice()</p>
     <p>Seller's ID: <a href="/users/$advert.getAdvertOwner().getId()">$advert.getAdvertOwner().getUsername()</a></p>
