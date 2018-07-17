@@ -14,14 +14,14 @@ public class User {
     private String username;
     private List<Advert> userAdverts;
     private List<Advert> favouriteAdverts;
-
+    private String userImage;
 
     public User() {
-
     }
 
-    public User(String username) {
+    public User(String username, String userImage) {
         this.username = username;
+        this.userImage = userImage;
         this.userAdverts =  new ArrayList<Advert>();
         this.favouriteAdverts =  new ArrayList<Advert>();
     }
@@ -47,6 +47,10 @@ public class User {
     )
     public List<Advert> getFavouriteAdverts() {return favouriteAdverts;}
     public void setFavouriteAdverts(List<Advert> favouriteAdverts) {this.favouriteAdverts = favouriteAdverts;}
+
+    @Column(name="user_image")
+    public String getUserImage() {return userImage;}
+    public void setUserImage(String userImage) {this.userImage = userImage;}
 
     public void addFavouriteAdvert(Advert advert){
         favouriteAdverts.add(advert);

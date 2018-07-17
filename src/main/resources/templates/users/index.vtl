@@ -6,7 +6,10 @@
 
     <ul>
         #foreach ($user in $allUsers)
-        <li><a href="/users/$user.getId()">$user.getUsername()</a></li>
+        <div class = "userBox">
+            <img src="$user.getUserImage()">
+            <li><a href="/users/$user.getId()">$user.getUsername()</a></li>
+        </div>
         #end
     </ul>
 

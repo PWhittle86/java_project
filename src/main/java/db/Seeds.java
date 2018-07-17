@@ -10,11 +10,11 @@ public class Seeds {
         DBHelper.deleteAll(User.class);
         DBHelper.deleteAll(Category.class);
 
-        User user = new User("Jack");
+        User user = new User("Jack", "/seedImages/jack.png");
         DBHelper.save(user);
-        User user1 = new User("Pete");
+        User user1 = new User("Pete", "/seedImages/pete.png");
         DBHelper.save(user1);
-        User user2 = new User("Adri");
+        User user2 = new User("Adri", "/seedImages/adri.png");
         DBHelper.save(user2);
 
         Advert advert = new Advert("old shoes", "old nikes mate, worn 600 times", 10.0, user, "/seedImages/Shoes.jpg");
