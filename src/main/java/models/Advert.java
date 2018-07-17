@@ -18,17 +18,19 @@ public class Advert {
     private Double askingPrice;
     private User advertOwner;
     private List<User> favouritedBy;
+    private String imageLocation;
 
     public Advert() {
     }
 
-    public Advert(String advertTitle, String advertDescription, Double askingPrice, User advertOwner) {
+    public Advert(String advertTitle, String advertDescription, Double askingPrice, User advertOwner, String imageLocation) {
         this.advertTitle = advertTitle;
         this.advertDescription = advertDescription;
         this.categories = new ArrayList<Category>();
         this.askingPrice = askingPrice;
         this.advertOwner = advertOwner;
         this.favouritedBy = new ArrayList<User>();
+        this.imageLocation = imageLocation;
     }
 
     @Id
@@ -89,6 +91,8 @@ public class Advert {
     )
     public List<User> getFavouritedBy() {return favouritedBy;}
     public void setFavouritedBy(List<User> favouritedBy) {this.favouritedBy = favouritedBy;}
+
+
 
     public void addCategory(Category category) {
         this.categories.add(category);
