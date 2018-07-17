@@ -16,7 +16,9 @@ public class DBComment {
     private static Transaction transaction;
 
     public static void advertComment(Advert advert, User user, Comment comment){
+        user.setComments(findUserComments(user));
         user.addComment(comment);
+        advert.setComments(findAdvertComments(advert));
         advert.addComment(comment);
 
         DBHelper.save(user);
