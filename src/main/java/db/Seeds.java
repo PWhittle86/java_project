@@ -2,17 +2,13 @@ package db;
 
 import models.Advert;
 import models.Category;
-import models.ShopFront;
 import models.User;
 
 public class Seeds {
     public static void seedData() {
-        DBHelper.deleteAll(ShopFront.class);
         DBHelper.deleteAll(Advert.class);
         DBHelper.deleteAll(User.class);
         DBHelper.deleteAll(Category.class);
-
-        ShopFront shopFront = new ShopFront();
 
         User user = new User("Jack");
         DBHelper.save(user);
