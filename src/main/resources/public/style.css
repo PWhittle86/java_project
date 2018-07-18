@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  font-size: 18px;
   margin: 0;
 }
 
@@ -8,7 +9,7 @@ body {
   flex-wrap: wrap;
   justify-content: space-around;
   width: 100%;
-  background-color: #DBDBDB;
+  background-color: #DE8F6E;
 }
 
 .button {
@@ -18,20 +19,46 @@ body {
 }
 
 .button:hover {
-  background-color: #C8C8C8;
+  background-color: #DE8F6E;
 }
 
 .category-nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  border-bottom: 0.1em solid #DBDBDB;
+  border-bottom: 0.1em solid #DE8F6E;
+}
+.tile-images{
+  height: 190px;
 }
 
+.show-images {
+  height: 400px;
+}
+
+.tile-list {
+  display: flex;
+flex-wrap: wrap;
+}
+
+.advert-box {
+  border: solid 1px #DE8F6E;
+    padding: 1.4em;
+    margin-right: 5em;
+    margin-bottom: 2em;
+}
 .container {
   margin-left: 2em;
   margin-right: 2em;
   display: grid;
+}
+
+h2 {
+  color: #DE8F6E;
+}
+
+h3 {
+  color: #DE8F6E;
 }
 
 form {

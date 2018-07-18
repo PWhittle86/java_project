@@ -1,13 +1,12 @@
-<p class="pageHeader">Users:</p>
-
+<h2>Users:</h2>
 <div class="container">
 
     <a href="/users/new">Add User</a>
 
-    <ul>
+    <ul class="tile-list">
         #foreach ($user in $allUsers)
-        <div class = "userBox">
-            <img src="$user.getUserImage()">
+        <div class = "advert-box">
+            <a href="/users/$user.getId()"><img src="$user.getUserImage()" class="tile-images"></a>
             <li><a href="/users/$user.getId()">$user.getUsername()</a></li>
         </div>
         #end

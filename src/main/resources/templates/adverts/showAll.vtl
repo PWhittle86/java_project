@@ -1,11 +1,13 @@
-<p class="pageHeader">All Adverts</p>
+<h2>All Adverts</h2>
 
 <div class="advertList">
-    <ul>
+    <ul class="tile-list">
         #foreach ($advert in $allAdverts)
-        <div class="advertBox">
-        <img src="$advert.getImageLocation()">
-        <li><a href="/adverts/$advert.getId()">$advert.getAdvertTitle()</a></li>
+        <div class="advert-box">
+            <a href="/adverts/$advert.getId()"><img src="$advert.getImageLocation()" class="tile-images"></a>
+            <li><a href="/adverts/$advert.getId()">$advert.getAdvertTitle()</a></li>
+            <li>Price: £$advert.getAskingPrice()</li>
+            <li>by <a href="/users/$advert.getAdvertOwner().getId()">$advert.getAdvertOwner().getUsername()</a></li>
         </div>
         #end
     </ul>
