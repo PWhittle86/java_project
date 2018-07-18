@@ -1,37 +1,39 @@
 <h3>$advert.getAdvertTitle()</h3>
 
-<div class="container">
-
+<div class="advert-container">
     <img src="$advert.getImageLocation()" class="show-images">
-    <p class="ad-description">Seller's Description: $advert.getAdvertDescription()</p>
-    <p>Asking price: £$advert.getAskingPrice()</p>
-    <p>Seller's ID: <a href="/users/$advert.getAdvertOwner().getId()">$advert.getAdvertOwner().getUsername()</a></p>
+    <div class="advert-1">
 
-    <div class="crud-buttons">
-    <form action="/adverts/update/$advert.getId()" method="get" class="crud-button">
-        <input type="submit" value="Edit" class="crud-button">
-    </form>
-    <form action="/adverts/delete/$advert.getId()" method="post" class="crud-button">
-        <input type="submit" value="Delete" class="crud-button">
-    </form>
-    <form action="/adverts/confirmUser/$advert.getId()" method="get" class="crud-button">
-        <input type="submit" value="Add To Favourites" class="crud-button">
-    </form>
-    </div>
-    <div class="comment-box">
-        #foreach ($comment in $comments)
-        <p class="comment"><a href="/users/$comment.getUser().getId()">$comment.getUser().getUsername()</a>: $comment.getComment()</p>
-        #end
+        <p class="ad-description">Seller's Description: $advert.getAdvertDescription()</p>
+        <p>Asking price: £$advert.getAskingPrice()</p>
+        <p>Seller's ID: <a href="/users/$advert.getAdvertOwner().getId()">$advert.getAdvertOwner().getUsername()</a></p>
 
-        <form action="/adverts/comment/$advert.getId()" method="post">
-            <select name="selectedUser" id="selectedUser">
-                #foreach($user in $allUsers)
-                <option value="$user.getId()">$user.getUsername()</option>
-                #end
-            </select>
-            <label for="comment">Comment:</label>
-            <textarea name="comment" class="textbox" id="comment" cols="30" rows="3" maxlength="200"></textarea>
-            <input type="submit" value="post" class="button">
-        </form>
+        <div class="crud-buttons">
+            <form action="/adverts/update/$advert.getId()" method="get" class="crud-button">
+                <input type="submit" value="Edit" class="crud-button">
+            </form>
+            <form action="/adverts/delete/$advert.getId()" method="post" class="crud-button">
+                <input type="submit" value="Delete" class="crud-button">
+            </form>
+            <form action="/adverts/confirmUser/$advert.getId()" method="get" class="crud-button">
+                <input type="submit" value="Add To Favourites" class="crud-button">
+            </form>
+        </div>
+        <div class="comment-box">
+            #foreach ($comment in $comments)
+            <p class="comment"><a href="/users/$comment.getUser().getId()">$comment.getUser().getUsername()</a>: $comment.getComment()</p>
+            #end
+
+            <form action="/adverts/comment/$advert.getId()" method="post">
+                <select name="selectedUser" id="selectedUser">
+                    #foreach($user in $allUsers)
+                    <option value="$user.getId()">$user.getUsername()</option>
+                    #end
+                </select>
+                <label for="comment">Comment:</label>
+                <textarea name="comment" class="textbox" id="comment" cols="30" rows="3" maxlength="200"></textarea>
+                <input type="submit" value="post" class="button">
+            </form>
+        </div>
     </div>
 </div>
