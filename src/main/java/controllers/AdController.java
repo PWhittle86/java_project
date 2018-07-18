@@ -268,11 +268,12 @@ public class AdController {
         post("/adverts/uploadImage/:id", (req, res) -> {
 
             Path tempFile = Files.createTempFile(uploadDir.toPath(), "", "");
-
+            String advertImage = "";
             req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
 
             try (InputStream input = req.raw().getPart("userImage").getInputStream()) {
                 Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
+                advertImage = "/" + tempFile.getFileName().toString();
             }
 
             return "<h1>You uploaded this image:<h1><img src='" + tempFile.getFileName() + "'>";
