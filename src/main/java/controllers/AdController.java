@@ -27,6 +27,7 @@ import java.util.Map;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
+import static spark.SparkBase.staticFileLocation;
 import static spark.route.HttpMethod.delete;
 import static spark.route.HttpMethod.get;
 
@@ -50,7 +51,7 @@ public class AdController {
     }
 
     private void setupEndPoints(){
-        File uploadDir = new File("src/main/resources/public/userUploads");
+        File uploadDir = new File("src/main/resources/public/seedImages");
         uploadDir.mkdir(); // create the upload directory if it doesn't exist
 
         get("/adverts", (req, res) -> {
@@ -112,7 +113,7 @@ public class AdController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        get("/adverts/search/", (req, res) -> { //Doesn't work at the moment. Query instructors on Monday.
+        get("/adverts/search/", (req, res) -> {
             String searchCriteria = req.queryParams("searchCriteria");
             List<Advert> advertsList = DBAdvert.findAdvertsByName(searchCriteria);
 
@@ -149,7 +150,7 @@ public class AdController {
 
                 try {
                     Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
-                    advertImage = "/userUploads/" + tempFile.getFileName().toString();
+                    advertImage = "/seedImages/" + tempFile.getFileName().toString();
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
@@ -167,8 +168,8 @@ public class AdController {
             int categoryId = Integer.parseInt(getStringFromRawRequest(rawRequest, "advertCategory"));
             Category category = DBHelper.find(categoryId, Category.class);
 
-            String advertTitle = req.queryParams(getStringFromRawRequest(rawRequest, "advertTitle"));
-            String advertDescription = req.queryParams(getStringFromRawRequest(rawRequest, "advertDescription"));
+            String advertTitle = getStringFromRawRequest(rawRequest, "advertTitle");
+            String advertDescription = getStringFromRawRequest(rawRequest, "advertDescription");
             double askingPrice = Double.parseDouble(getStringFromRawRequest(rawRequest, "askingPrice"));
 
             Advert newAdvert = new Advert(advertTitle, advertDescription, askingPrice, user, advertImage);
