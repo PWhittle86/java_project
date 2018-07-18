@@ -44,11 +44,19 @@ width: max-content;
 }
 
 .comment-box select {
+  margin-top: 1em;
   margin-bottom: 1em;
 }
 
+.comment-history {
+  border: 0.1em solid #DE8F6E;
+  border-radius: 10px;
+  width: max-content;
+padding-left: 1em;
+padding-right: 1em;
+}
+
 .comment-box input {
-  margin-top: 1em;
   margin-bottom: 1em;
 }
 
@@ -70,6 +78,7 @@ width: max-content;
 
 .show-images {
   height: 400px;
+  margin-bottom: 1em;
 }
 
 .tile-list {
@@ -95,11 +104,49 @@ border-radius: 15px;
   margin-right: 2em;
 }
 
-.advert-container {
+.grid-container {
+  /* margin-top: 2em; */
   display: grid;
-grid-template-columns: 1fr 1fr;
+grid-template-columns: 1fr 2fr;
+column-gap: 2em;
 }
 
+.small-images {
+  height: 100px;
+  border-radius: 10px;
+}
+
+.advert-2 {
+  width: max-content;
+padding-left: 1em;
+padding-right: 1em;
+margin: auto;
+}
+.mission-statement{
+  font-size: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.link-button {
+  text-decoration: none;
+color: black;
+border: 1px solid #DE8F6E;
+border-radius: 5px;
+padding: 0.2em;
+font-size: 30px;
+margin: 0.3em;
+color: #DE8F6E;
+}
+table {
+  padding: 2em;
+  border: 0.1em solid #DE8F6E;
+  border-radius: 10px;
+}
+
+td {
+  padding: 1em;
+}
 h2 {
   color: #DE8F6E;
 }

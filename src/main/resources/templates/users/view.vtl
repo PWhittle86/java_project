@@ -1,27 +1,44 @@
 <h2>$foundUser.getUsername()</h2>
-<div class="container">
-
-    <img src="$foundUser.getUserImage()" class="show-images">
-
-    <ul>
-        #foreach ($advert in $userAdverts)
-        <li><a href="/adverts/$advert.getId()">$advert.getAdvertTitle()</a></li>
-        #end
-    </ul>
-
-    <a href="/users/$foundUser.getId()/edit">Edit</a>
-    <a href="/users/$foundUser.getId()/favouriteads">View Favourite Ads</a>
-
-    <div class="comment-box">
-        <p class="commentHeader">Comment History</p>
-        #foreach ($comment in $comments)
+<div class="grid-container">
+    <div class="advert-1">
+        <img src="$foundUser.getUserImage()" class="show-images">
+        <a href="/users/$foundUser.getId()/edit" class="link-button">Edit</a>
+        <a href="/users/$foundUser.getId()/favouriteads" class="link-button">View Favourite Ads</a>
+    </div>
+    <div class="advert-2">
+        <h2>$foundUser.getUsername()'s Adverts:</h2>
+        <table>
+            <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Asking Price</th>
+            </tr>
+            #foreach ($advert in $userAdverts)
+            <tr>
+                <td>
+                    <a href="/adverts/$advert.getId()"><img src="$advert.getImageLocation()" class="small-images"></a>
+                </td>
+                <td>
+                    <a href="/adverts/$advert.getId()">$advert.getAdvertTitle()</a>
+                </td>
+                <td>
+                    £$advert.getAskingPrice()
+                </td>
+            </tr>
+            #end
+        </table>
+    </div>
+</div>
+<div class="comment-box">
+    <h2>Comment History:</h2>
+    #foreach ($comment in $comments)
+    <div class="comment-history">
         <p class="comment"><a href="/adverts/$comment.getAdvert().getId()">$comment.getAdvert().getAdvertTitle()</a>: $comment.getComment()</p>
         <form action="/users/delete/comment/$comment.getId()" method="post">
             <input type="submit" value="Delete" class="button">
         </form>
-        #end
     </div>
-
+    #end
 </div>
 
 

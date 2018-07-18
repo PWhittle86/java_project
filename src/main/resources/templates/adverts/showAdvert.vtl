@@ -1,6 +1,6 @@
 <h3>$advert.getAdvertTitle()</h3>
 
-<div class="advert-container">
+<div class="grid-container">
     <img src="$advert.getImageLocation()" class="show-images">
     <div class="advert-1">
 
@@ -20,20 +20,21 @@
             </form>
         </div>
         <div class="comment-box">
-            #foreach ($comment in $comments)
-            <p class="comment"><a href="/users/$comment.getUser().getId()">$comment.getUser().getUsername()</a>: $comment.getComment()</p>
-            #end
-
             <form action="/adverts/comment/$advert.getId()" method="post">
+                <label for="comment">Comment:</label>
+                <textarea name="comment" class="textbox" id="comment" cols="30" rows="3" maxlength="200"></textarea>
+                <label for="selectedUser">Select Commenting User:
                 <select name="selectedUser" id="selectedUser">
                     #foreach($user in $allUsers)
                     <option value="$user.getId()">$user.getUsername()</option>
                     #end
                 </select>
-                <label for="comment">Comment:</label>
-                <textarea name="comment" class="textbox" id="comment" cols="30" rows="3" maxlength="200"></textarea>
+                </label>
                 <input type="submit" value="post" class="button">
             </form>
+            #foreach ($comment in $comments)
+            <p class="comment"><a href="/users/$comment.getUser().getId()">$comment.getUser().getUsername()</a>: $comment.getComment()</p>
+            #end
         </div>
     </div>
 </div>
