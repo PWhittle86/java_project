@@ -144,12 +144,12 @@ public class AdController {
             // IMAGE UPLOAD
             try {
                 Part foo = rawRequest.getPart("imageLocation");
-                Path tempFile = Files.createTempFile(uploadDir.toPath(), "", ".png");
+                Path tempFile = Files.createTempFile(uploadDir.toPath(), "", ".jpg");
                 InputStream input = foo.getInputStream();
 
                 try {
                     Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
-                    advertImage = "userUploads/" + tempFile.getFileName().toString();
+                    advertImage = "/userUploads/" + tempFile.getFileName().toString();
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
