@@ -51,7 +51,7 @@ public class AdController {
     }
 
     private void setupEndPoints(){
-        File uploadDir = new File("src/main/resources/public/seedImages");
+        File uploadDir = new File("/Users/user/Desktop/java_project/uploads");
         uploadDir.mkdir(); // create the upload directory if it doesn't exist
 
         get("/adverts", (req, res) -> {
@@ -150,7 +150,9 @@ public class AdController {
 
                 try {
                     Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
-                    advertImage = "/seedImages/" + tempFile.getFileName().toString();
+                    advertImage = "/" + tempFile.getFileName().toString();
+                    Runtime rt = Runtime.getRuntime();
+                    Process pr = rt.exec("xattr -dr com.apple.quarantine " + advertImage);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
