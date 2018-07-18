@@ -22,6 +22,20 @@ body {
   background-color: #DE8F6E;
 }
 
+.crud-buttons {
+  display: flex;
+  flex-flow: row;
+
+}
+
+.comment-box {
+  margin-top: 3em;
+}
+
+.crud-button {
+  width: max-content;
+}
+
 .category-nav {
   display: flex;
   flex-wrap: wrap;
@@ -39,6 +53,13 @@ body {
 .tile-list {
   display: flex;
 flex-wrap: wrap;
+}
+
+.ad-description {
+  border: solid 0.5px #DE8F6E;
+  width: max-content;
+padding: 1em;
+border-radius: 15px;
 }
 
 .advert-box {
