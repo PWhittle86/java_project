@@ -194,7 +194,7 @@ public class AdController {
 
             DBUser.addToUserFavourites(selectedUser, favAdvert);
 
-            res.redirect("/users"); //Might change this later so that it points to the user's favourite adverts, once it has been implemented.
+            res.redirect("/users/" + userId); //Might change this later so that it points to the user's favourite adverts, once it has been implemented.
             return null;
         }, new VelocityTemplateEngine());
 
@@ -209,7 +209,7 @@ public class AdController {
             DBHelper.save(newComment);
             DBComment.advertComment(advert, selectedUser, newComment);
 
-            response.redirect("/adverts");
+            response.redirect("/adverts/" + advertId );
             return null;
         }, new VelocityTemplateEngine() );
 
