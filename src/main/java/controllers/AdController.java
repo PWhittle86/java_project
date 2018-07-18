@@ -12,11 +12,10 @@ import spark.template.velocity.VelocityTemplateEngine;
 import spark.utils.IOUtils;
 
 import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,9 +36,21 @@ public class AdController {
         this.setupEndPoints();
     }
 
-    private void setupEndPoints(){
+    private String getStringFromRawRequest(HttpServletRequest rawRequest, String keyName) {
+        StringWriter writer = new StringWriter();
+        try {
+            IOUtils.copy(rawRequest.getPart(keyName).getInputStream(), writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
+        return writer.toString();
 
-        File uploadDir = new File("upload");
+    }
+
+    private void setupEndPoints(){
+        File uploadDir = new File("src/main/resources/public/userUploads");
         uploadDir.mkdir(); // create the upload directory if it doesn't exist
 
         get("/adverts", (req, res) -> {
@@ -125,17 +136,40 @@ public class AdController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        post("/adverts/new", (req, res) -> {
-            int userId = Integer.parseInt(req.queryParams("advertOwner"));
+        post("/adverts/new", "multipart/form-data", (req, res) -> {
+            req.attribute("org.eclipse.multipartConfig", new MultipartConfigElement("daveland"));
+
+            HttpServletRequest rawRequest = req.raw();
+            String advertImage = "";
+            // IMAGE UPLOAD
+            try {
+                Part foo = rawRequest.getPart("imageLocation");
+                Path tempFile = Files.createTempFile(uploadDir.toPath(), "", ".png");
+                InputStream input = foo.getInputStream();
+
+                try {
+                    Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
+                    advertImage = "userUploads/" + tempFile.getFileName().toString();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+            // END IMAGE UPLOAD
+
+
+            int userId = Integer.parseInt(getStringFromRawRequest(rawRequest, "advertOwner"));
             User user = DBHelper.find(userId, User.class);
 
-            int categoryId = Integer.parseInt(req.queryParams("advertCategory"));
+            int categoryId = Integer.parseInt(getStringFromRawRequest(rawRequest, "advertCategory"));
             Category category = DBHelper.find(categoryId, Category.class);
 
-            String advertTitle = req.queryParams("advertTitle");
-            String advertDescription = req.queryParams("advertDescription");
-            String advertImage = "/seedImages/" + req.queryParams("imageLocation");
-            double askingPrice = Double.parseDouble(req.queryParams("askingPrice"));
+            String advertTitle = req.queryParams(getStringFromRawRequest(rawRequest, "advertTitle"));
+            String advertDescription = req.queryParams(getStringFromRawRequest(rawRequest, "advertDescription"));
+            double askingPrice = Double.parseDouble(getStringFromRawRequest(rawRequest, "askingPrice"));
 
             Advert newAdvert = new Advert(advertTitle, advertDescription, askingPrice, user, advertImage);
             newAdvert.addCategory(category);
