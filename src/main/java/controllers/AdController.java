@@ -11,7 +11,17 @@ import models.User;
 import org.dom4j.rule.Mode;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
+import spark.utils.IOUtils;
 
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
+import java.io.*;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +29,7 @@ import java.util.Map;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
+import static spark.SparkBase.staticFileLocation;
 import static spark.route.HttpMethod.delete;
 import static spark.route.HttpMethod.get;
 
@@ -28,7 +39,22 @@ public class AdController {
         this.setupEndPoints();
     }
 
+    private String getStringFromRawRequest(HttpServletRequest rawRequest, String keyName) {
+        StringWriter writer = new StringWriter();
+        try {
+            IOUtils.copy(rawRequest.getPart(keyName).getInputStream(), writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
+        return writer.toString();
+
+    }
+
     private void setupEndPoints(){
+        File uploadDir = new File("/Users/user/Desktop/java_project/uploads");
+        uploadDir.mkdir(); // create the upload directory if it doesn't exist
 
         get("/adverts", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
@@ -100,7 +126,7 @@ public class AdController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        get("/adverts/search/", (req, res) -> { //Doesn't work at the moment. Query instructors on Monday.
+        get("/adverts/search/", (req, res) -> {
             String searchCriteria = req.queryParams("searchCriteria");
             List<Advert> advertsList = DBAdvert.findAdvertsByName(searchCriteria);
 
@@ -130,17 +156,42 @@ public class AdController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        post("/adverts/new", (req, res) -> {
-            int userId = Integer.parseInt(req.queryParams("advertOwner"));
+        post("/adverts/new", "multipart/form-data", (req, res) -> {
+            req.attribute("org.eclipse.multipartConfig", new MultipartConfigElement("daveland"));
+
+            HttpServletRequest rawRequest = req.raw();
+            String advertImage = "";
+            // IMAGE UPLOAD
+            try {
+                Part foo = rawRequest.getPart("imageLocation");
+                Path tempFile = Files.createTempFile(uploadDir.toPath(), "", ".jpg");
+                InputStream input = foo.getInputStream();
+
+                try {
+                    Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
+                    advertImage = "/" + tempFile.getFileName().toString();
+                    Runtime rt = Runtime.getRuntime();
+                    Process pr = rt.exec("xattr -dr com.apple.quarantine " + advertImage);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+            // END IMAGE UPLOAD
+
+
+            int userId = Integer.parseInt(getStringFromRawRequest(rawRequest, "advertOwner"));
             User user = DBHelper.find(userId, User.class);
 
-            int categoryId = Integer.parseInt(req.queryParams("advertCategory"));
+            int categoryId = Integer.parseInt(getStringFromRawRequest(rawRequest, "advertCategory"));
             Category category = DBHelper.find(categoryId, Category.class);
 
-            String advertTitle = req.queryParams("advertTitle");
-            String advertDescription = req.queryParams("advertDescription");
-            String advertImage = "/seedImages/" + req.queryParams("imageLocation");
-            double askingPrice = Double.parseDouble(req.queryParams("askingPrice"));
+            String advertTitle = getStringFromRawRequest(rawRequest, "advertTitle");
+            String advertDescription = getStringFromRawRequest(rawRequest, "advertDescription");
+            double askingPrice = Double.parseDouble(getStringFromRawRequest(rawRequest, "askingPrice"));
 
             Advert newAdvert = new Advert(advertTitle, advertDescription, askingPrice, user, advertImage);
             newAdvert.addCategory(category);
@@ -198,6 +249,7 @@ public class AdController {
             return null;
         }, new VelocityTemplateEngine());
 
+
         post("/adverts/comment/:id", (request, response) ->{
             int advertId = Integer.parseInt(request.params(":id"));
             Advert advert = DBHelper.find(advertId, Advert.class);
@@ -212,6 +264,21 @@ public class AdController {
             response.redirect("/adverts");
             return null;
         }, new VelocityTemplateEngine() );
+
+        post("/adverts/uploadImage/:id", (req, res) -> {
+
+            Path tempFile = Files.createTempFile(uploadDir.toPath(), "", "");
+
+            req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+
+            try (InputStream input = req.raw().getPart("userImage").getInputStream()) {
+                Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
+            }
+
+            return "<h1>You uploaded this image:<h1><img src='" + tempFile.getFileName() + "'>";
+
+        });
+
 
     }
 

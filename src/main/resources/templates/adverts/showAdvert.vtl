@@ -11,13 +11,23 @@
     <form action="/adverts/update/$advert.getId()" method="get" class="crud-button">
         <input type="submit" value="Edit" class="crud-button">
     </form>
+
     <form action="/adverts/delete/$advert.getId()" method="post" class="crud-button">
         <input type="submit" value="Delete" class="crud-button">
     </form>
     <form action="/adverts/confirmUser/$advert.getId()" method="get" class="crud-button">
         <input type="submit" value="Add To Favourites" class="crud-button">
+
     </form>
+
+    <form action="/adverts/uploadImage/$advert.getId()" method="post" enctype="multipart/form-data">
+        <label for="userImage">Upload Image</label>
+        <input type="file" id="userImage" name="userImage"/>
+        <input type="submit" id="buttonUpload" value="Upload"/>
+    </form>
+
     </div>
+
     <div class="comment-box">
         #foreach ($comment in $comments)
         <p class="comment"><a href="/users/$comment.getUser().getId()">$comment.getUser().getUsername()</a>: $comment.getComment()</p>
