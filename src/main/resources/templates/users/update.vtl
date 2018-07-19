@@ -1,12 +1,14 @@
 <h2>Edit User Details</h2>
-<form action="/users/$foundUser.getId()" method="post">
-    <label for="username">Username:</label>
-    <input type="text" class="inputbox" name="username" id="username" value="$foundUser.getUsername()">
+<div class="margin-sort">
+    <form action="/users/$foundUser.getId()" method="post">
+        <label for="username">Username:</label>
+        <input type="text" class="inputbox" name="username" id="username" value="$foundUser.getUsername()">
 
-    <label for="imageLocation">Image:</label>
-    <input class="inputbox" type="file" name="imageLocation" required="true" id="imageLocation">
+        <label for="imageLocation">Image:</label>
+        <input class="inputbox" type="file" name="imageLocation" required="true" id="imageLocation">
 
-    <input type="submit" value="Save" class="button">
-</form>
+        <input type="submit" value="Save" class="button">
+    </form>
+</div>
 
-<a href="/users/$foundUser.getId()" class="button center">Cancel</a>
+<a href="/users/$foundUser.getId()" class="link-button">Cancel</a>

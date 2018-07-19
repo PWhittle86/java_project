@@ -7,6 +7,7 @@
 </head>
 <body>
 <nav class="main-nav">
+    <p class="header">OMT</p>
     <a href="/adverts" class="button">Home</a>
     <a href="/users" class="button">Users</a>
     <form method='get' action='/adverts/search/'>
@@ -16,7 +17,7 @@
 </nav>
 <nav class="category-nav">
     #foreach ($category in $allCategories)
-    <a href="/adverts/category/$category.getId()" class="button">$category.getCategoryName()</a>
+    <a href="/adverts/category/$category.getId()" class="button cat">$category.getCategoryName()</a>
     #end
 </nav>
 

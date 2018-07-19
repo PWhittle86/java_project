@@ -2,6 +2,7 @@ body {
   font-family: sans-serif;
   font-size: 18px;
   margin: 0;
+  background: #42b1b80a;
 }
 
 .main-nav {
@@ -12,15 +13,29 @@ body {
   background-color: #DE8F6E;
 }
 
+.main-nav p {
+  margin: 0;
+padding: 0.5em;
+font-size: 30px;
+}
+
 .button {
   text-decoration: none;
   padding: 0.5em;
   color: black;
   width: max-content;
+  font-size: 30px;
+
+}
+
+.cat {
+  font-size: 20px;
+  opacity: 0.65;
 }
 
 .button:hover {
   background-color: #DE8F6E;
+  opacity: 1;
 }
 
 .crud-buttons {
@@ -137,6 +152,10 @@ padding: 0.2em;
 font-size: 30px;
 margin: 0.3em;
 color: #DE8F6E;
+}
+
+.margin-sort{
+  margin-bottom: 2em;
 }
 table {
   padding: 2em;

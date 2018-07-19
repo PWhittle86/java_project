@@ -1,12 +1,14 @@
 <h2>New User</h2>
-<form action="/users" method="post">
-    <label for="username">Username:</label>
-    <input type="text" class="inputbox" name="username" id="username" required="true">
+<div class="margin-sort">
+    <form action="/users" method="post">
+        <label for="username">Username:</label>
+        <input type="text" class="inputbox" name="username" id="username" required="true">
 
-    <label for="imageLocation">Image:</label>
-    <input class="inputbox" type="file" name="imageLocation" required="true" id="imageLocation">
+        <label for="imageLocation">Image:</label>
+        <input class="inputbox" type="file" name="imageLocation" required="true" id="imageLocation">
 
-    <input type="submit" value="save" class="button">
-</form>
+        <input type="submit" value="save" class="button">
+    </form>
+</div>
 
-<a href="/users" class="button">Cancel</a>
+<a href="/users" class="link-button">Cancel</a>
