@@ -30,6 +30,17 @@ public class AdController {
 
     private void setupEndPoints(){
 
+        get("/", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Advert> allAdverts = DBHelper.getAll(Advert.class);
+            List<Category> allCategories = DBHelper.getAll(Category.class);
+
+            model.put("allCategories", allCategories);
+            model.put("allAdverts", allAdverts);
+            model.put("template", "templates/adverts/showAll.vtl");
+            return new ModelAndView(model, "templates/homepageLayout.vtl");
+        }, new VelocityTemplateEngine());
+
         get("/adverts", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Advert> allAdverts = DBHelper.getAll(Advert.class);
