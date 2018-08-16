@@ -9,7 +9,7 @@
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <!--<property name="hibernate.connection.username"></property>-->
         <!--<property name="hibernate.connection.password"></property>-->
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/javaprojectdb</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://ec2-54-235-242-63.compute-1.amazonaws.com/dc4600jgieo8ft?user=xbeuovorwubodc&amp;password=0ec25eb5f1276c448a36e574c43751d33ee8177f71923916a536dedfccfcca41</property>
         <property name="connection_pool_size">1</property>
         <property name="hbm2ddl.auto">create-drop</property>
         <property name="show_sql">true</property>
